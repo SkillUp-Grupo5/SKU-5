@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import PersonIcon from '@mui/icons-material/Person';
 import LockIcon from '@mui/icons-material/Lock';
 
-import '../../styles/application/auth/pages/LoginPage.css';
+import '../../../styles/application/auth/pages/LoginPage.css';
 
 
 export const LoginPage = () => {
