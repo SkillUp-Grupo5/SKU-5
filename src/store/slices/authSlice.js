@@ -9,26 +9,19 @@ export const authSlice = createSlice({
   },
   reducers: {
     authLogin: (state, action) => {
-
       state.checking = false;
       state.uid = action.payload.uid;
       state.name = action.payload.name;
     },
-    authCheckingFinish: (state) => {
-
+    authCheckingFinish: state => {
       state.checking = false;
     },
-    authLogout: (state) => {
-
+    authLogout: state => {
       state.uid = null;
       state.name = null;
       state.checking = false;
     },
-
   },
-})
+});
 
-export const {
-  authLogin,
-  authCheckingFinish,
-  authLogout } = authSlice.actions;
+export const { authLogin, authCheckingFinish, authLogout } = authSlice.actions;
