@@ -6,6 +6,8 @@ import { store } from "./store";
 
 import { AppRouter } from "./router";
 
+import './styles/index.css'
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
