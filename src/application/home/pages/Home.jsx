@@ -1,7 +1,9 @@
 import React from 'react';
+
+import { LayoutPage } from '../../home';
+
 import '../../../styles/globals.css';
 import '../../../styles/application/home/pages/Home.css';
-import { LayoutPage } from '../components/LayoutPage';
 
 export const Home = () => {
   return (
