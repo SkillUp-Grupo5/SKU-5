@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { LayoutPage } from '../application/utils/LayoutPage'
 
 const Home = lazy(() => import('../application/home/pages/Home'))
-// const Balance = lazy(() => import('../modules/Balance-charge/Index'))
+const Balance = lazy(() => import('../application/balance/pages/Balance'))
 // const Bills = lazy(() => import('../modules/Bills/Index'))
 const Movements = lazy(() => import('../application/movements/Index'))
 
@@ -20,7 +20,14 @@ export const DashboardRoute = ({ handle }) => {
 					}
 				/>
 				<Route path="/bills" element={<React.Suspense fallback={<></>}>{/* <Bills /> */}</React.Suspense>} />
-				<Route path="/balance" element={<React.Suspense fallback={<></>}>{/* <Balance /> */}</React.Suspense>} />
+				<Route
+					path="/balance"
+					element={
+						<React.Suspense fallback={<></>}>
+							<Balance />
+						</React.Suspense>
+					}
+				/>
 				<Route
 					path="/movements"
 					element={
