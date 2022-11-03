@@ -1,23 +1,17 @@
-import React from "react";
-import "../../../styles/globals.css";
-import "../../../styles/application/home/pages/Home.css";
-import { LayoutPage, UsersTable } from "../../utils";
-import { Box } from "@mui/material";
+import React from 'react'
+import '../../../styles/globals.css'
+import '../../../styles/application/home/pages/Home.css'
+import { UsersTable } from '../../utils'
+import { Box } from '@mui/material'
 
-export const Home = () => {
-  return (
-    <div className="App">
-      <LayoutPage>
-        <Box
-          width="100%"
-          height="50vh"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-        >
-          <UsersTable />
-        </Box>
-      </LayoutPage>
-    </div>
-  );
-};
+const Home = () => {
+	return (
+		<div className="App">
+			<Box width="100%" display="flex" justifyContent="center" alignItems="center">
+				{/* <UsersTable /> */}
+			</Box>
+		</div>
+	)
+}
+
+export default Home
