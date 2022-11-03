@@ -2,11 +2,13 @@ import axios from 'axios'
 
 // I N S T A N C E S
 export const axiosClientToken = axios.create({
-	baseURL: process.env.REACT_APP_API_URL,
+	baseURL: 'url',
+	// baseURL: process.env.REACT_APP_API_URL, // alternative way
 })
 
 export const axiosClient = axios.create({
-	baseURL: process.env.REACT_APP_API_URL,
+	baseURL: 'url',
+	// baseURL: process.env.REACT_APP_API_URL, // alternative way
 })
 
 //I N T E R C E P T O R S

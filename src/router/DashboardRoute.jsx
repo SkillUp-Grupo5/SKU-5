@@ -1,16 +1,15 @@
 import React, { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import { LayoutPage } from '../application/utils/LayoutPage'
 
-const Home = lazy(() => import('../modules/Home/Index'))
-const Balance = lazy(() => import('../modules/Balance-charge/Index'))
-const BalanceCharge = lazy(() => import('../modules/Balance-charge/Index'))
-const Bills = lazy(() => import('../modules/Bills/Index'))
-const Movements = lazy(() => import('../modules/Movements/Index'))
-const SendMoney = lazy(() => import('../modules/Sending-money/Index'))
+const Home = lazy(() => import('../application/home/pages/Home'))
+const Balance = lazy(() => import('../application/balance/pages/Balance'))
+// const Bills = lazy(() => import('../modules/Bills/Index'))
+const Movements = lazy(() => import('../application/movements/Index'))
 
 export const DashboardRoute = ({ handle }) => {
 	return (
-		<>
+		<LayoutPage>
 			<Routes>
 				<Route
 					path="/home"
@@ -20,22 +19,7 @@ export const DashboardRoute = ({ handle }) => {
 						</React.Suspense>
 					}
 				/>
-				<Route
-					path="/balance-charge"
-					element={
-						<React.Suspense fallback={<></>}>
-							<BalanceCharge />
-						</React.Suspense>
-					}
-				/>
-				<Route
-					path="/bills"
-					element={
-						<React.Suspense fallback={<></>}>
-							<Bills />
-						</React.Suspense>
-					}
-				/>
+				<Route path="/bills" element={<React.Suspense fallback={<></>}>{/* <Bills /> */}</React.Suspense>} />
 				<Route
 					path="/balance"
 					element={
@@ -52,16 +36,8 @@ export const DashboardRoute = ({ handle }) => {
 						</React.Suspense>
 					}
 				/>
-				<Route
-					path="/sending-of-money"
-					element={
-						<React.Suspense fallback={<></>}>
-							<SendMoney />
-						</React.Suspense>
-					}
-				/>
 			</Routes>
-			<button onClick={() => handle(false)}>Loggout</button>
-		</>
+			{/* <button onClick={() => handle(false)}>Loggout</button> */}
+		</LayoutPage>
 	)
 }

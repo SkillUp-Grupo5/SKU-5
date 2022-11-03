@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: space-evenly;
+
+  flex-direction: row;
+}
+.paper{
+  background: linear-gradient(
+    360deg,
+    #eeeeeef0,
+    #efefef,
+    #ffffff,
+    #ffffff,
+    #ffffff
+  );
+}

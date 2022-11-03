@@ -1,0 +1,19 @@
+.inputGroup {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+.buttonSpace {
+  display: flex;
+  justify-content: center;
+}
+.paperForm {
+  background: linear-gradient(
+    0deg,
+    #e6e5e5,
+    #efefef,
+    #ffffff,
+    #ffffff,
+    #ffffff
+  );
+}

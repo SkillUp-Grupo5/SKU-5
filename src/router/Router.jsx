@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { Footer } from '../components'
-import { Login } from '../modules/Auth/Login/Index'
-import { Register } from '../modules/Auth/Register/Index'
+
+import { LoginPage, RegisterPage } from '../application/auth/pages'
 import { DashboardRoute } from './DashboardRoute'
+
+import Footer from '../application/utils/Footer'
+
 import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 
@@ -12,8 +14,6 @@ export const Router = () => {
 	const handleLogged = (status) => {
 		setLogged(status)
 	}
-
-	console.log(logged)
 	return (
 		<>
 			<BrowserRouter>
@@ -24,7 +24,7 @@ export const Router = () => {
 						path="/login"
 						element={
 							<PublicRoute logged={logged}>
-								<Login handle={handleLogged} />
+								<LoginPage handle={handleLogged} />
 							</PublicRoute>
 						}
 					/>
@@ -33,7 +33,7 @@ export const Router = () => {
 						path="/register"
 						element={
 							<PublicRoute logged={logged}>
-								<Register />
+								<RegisterPage handle={handleLogged} />
 							</PublicRoute>
 						}
 					/>
@@ -48,7 +48,6 @@ export const Router = () => {
 					/>
 				</Routes>
 			</BrowserRouter>
-			<Footer />
 		</>
 	)
 }
