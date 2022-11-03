@@ -1,16 +1,22 @@
-import React from 'react';
-import '../../../styles/globals.css';
-import '../../../styles/application/home/pages/Home.css';
-import { LayoutPage } from '../../utils';
+import React from "react";
+import "../../../styles/globals.css";
+import "../../../styles/application/home/pages/Home.css";
+import { LayoutPage, UsersTable } from "../../utils";
+import { Box } from "@mui/material";
 
 export const Home = () => {
   return (
     <div className="App">
       <LayoutPage>
-        <header className="App-header">
-          <img src={'./alkemy_logo.svg'} className="App-logo" alt="logo" />
-          <p>Bienvenido a AlkyBank</p>
-        </header>
+        <Box
+          width="100%"
+          height="50vh"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <UsersTable />
+        </Box>
       </LayoutPage>
     </div>
   );
