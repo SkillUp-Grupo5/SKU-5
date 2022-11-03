@@ -1,18 +1,25 @@
-import {
-  Avatar,
-  Box,
-  Button,
-  Grid,
-  Link,
-  TextField,
-  Typography,
-} from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Box, Button, Grid, Link, TextField } from '@mui/material';
 import { LayoutPage } from '../../utils';
 import { Link as LinkRouter } from 'react-router-dom';
 import Title from '../../utils/Title';
+import { useFormik } from 'formik';
+import { YupRegisterValidations } from '../../../helpers';
 
 export const RegisterPage = () => {
+  const formik = useFormik({
+    initialValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    },
+    validationSchema: YupRegisterValidations,
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    },
+  });
+
   return (
     <LayoutPage>
       <Box
@@ -23,24 +30,24 @@ export const RegisterPage = () => {
         justifyContent="center"
         alignItems="center"
         sx={{
-          position: "absolute",
+          position: 'absolute',
           left: 0,
           top: 0,
-          backgroundColor: "#2c3338",
-          "& .MuiFormLabel-root": {
+          backgroundColor: '#2c3338',
+          '& .MuiFormLabel-root': {
             color: 'gray',
-            ":hover": {
-                color: 'gray',
-                borderColor: "none",
+            ':hover': {
+              color: 'gray',
+              borderColor: 'none',
             },
           },
-          "& .MuiOutlinedInput-root": {
+          '& .MuiOutlinedInput-root': {
             color: '#eee',
-            borderColor: "none",
-            backgroundColor: "#3b4148",
-            ":hover": {
-              borderColor: "none",
-              background: "#434a52",
+            borderColor: 'none',
+            backgroundColor: '#3b4148',
+            ':hover': {
+              borderColor: 'none',
+              background: '#434a52',
             },
           },
         }}
@@ -59,13 +66,13 @@ export const RegisterPage = () => {
             alignItems="center"
             justifyContent="center"
             sx={{
-              "& img": {
-                maxWidth: "30ch",
-                objectFit: "cover",
-                objectPosition: "20% 10%",
-                borderRadius: "50%",
+              '& img': {
+                maxWidth: '30ch',
+                objectFit: 'cover',
+                objectPosition: '20% 10%',
+                borderRadius: '50%',
               },
-              mb: 2
+              mb: 2,
             }}
           >
             <img
@@ -73,7 +80,12 @@ export const RegisterPage = () => {
               alt=""
             />
           </Box>
-          <Box component="form" sx={{ mt: 3, width: "50%" }}>
+
+          <Box
+            component="form"
+            sx={{ mt: 3, width: '60%' }}
+            onSubmit={formik.handleSubmit}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -84,6 +96,14 @@ export const RegisterPage = () => {
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  value={formik.values.firstName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.firstName && Boolean(formik.errors.firstName)
+                  }
+                  helperText={
+                    formik.touched.firstName && formik.errors.firstName
+                  }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -94,6 +114,12 @@ export const RegisterPage = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={formik.values.lastName}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.lastName && Boolean(formik.errors.lastName)
+                  }
+                  helperText={formik.touched.lastName && formik.errors.lastName}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -104,6 +130,10 @@ export const RegisterPage = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -115,6 +145,12 @@ export const RegisterPage = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={formik.values.password}
+                  onChange={formik.handleChange}
+                  error={
+                    formik.touched.password && Boolean(formik.errors.password)
+                  }
+                  helperText={formik.touched.password && formik.errors.password}
                 />
               </Grid>
             </Grid>
@@ -125,9 +161,9 @@ export const RegisterPage = () => {
               sx={{
                 mt: 3,
                 mb: 2,
-                backgroundColor: "#ea4c88",
-                ":hover": {
-                  backgroundColor: "#d44179",
+                backgroundColor: '#2AE3C8',
+                ':hover': {
+                  backgroundColor: '#00DFC0',
                 },
               }}
             >
