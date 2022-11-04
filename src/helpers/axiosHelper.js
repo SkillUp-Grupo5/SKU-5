@@ -2,13 +2,11 @@ import axios from 'axios'
 
 // I N S T A N C E S
 export const axiosClientToken = axios.create({
-	baseURL: 'url',
-	// baseURL: process.env.REACT_APP_API_URL, // alternative way
+	baseURL: 'http://wallet-main.eba-ccwdurgr.us-east-1.elasticbeanstalk.com',
 })
 
 export const axiosClient = axios.create({
-	baseURL: 'url',
-	// baseURL: process.env.REACT_APP_API_URL, // alternative way
+	baseURL: 'http://wallet-main.eba-ccwdurgr.us-east-1.elasticbeanstalk.com',
 })
 
 //I N T E R C E P T O R S
@@ -16,6 +14,7 @@ export const axiosClient = axios.create({
 //Response
 axiosClient.interceptors.response.use(
 	(response) => {
+		console.log(response)
 		response.data.token && localStorage.setItem('token', response.data.token)
 		return response
 	},
