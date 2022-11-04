@@ -1,16 +1,21 @@
-.container {
+.display {
+  border-radius: 20px;
   display: flex;
-  justify-content: space-evenly;
-
-  flex-direction: row;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.paper{
+.paper1 {
   background: linear-gradient(
-    360deg,
-    #eeeeeef0,
-    #efefef,
-    #ffffff,
-    #ffffff,
-    #ffffff
+    20deg,
+    #ffffff05,
+    #1976d200,
+    #1976d279,
+    #0066cb,
+    #0066cb
   );
+  width: 900px;
+}
+.paper2 {
+  background: linear-gradient(100deg, #ffffff05, #1976d279, #1976d279, #0066cb);
 }

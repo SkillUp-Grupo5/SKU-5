@@ -33,7 +33,18 @@ const style = {
 const ExpenseForm = (props) => {
   const { addNewExpense, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setForm({
+      amount: "",
+      concept: "",
+      currency: "",
+      type: "payload",
+    });
+    setmsgError1(false);
+    setmsgError2(false);
+    setmsgError3(false);
+  };
   const [currency, setCurrency] = React.useState("EUR");
   const [msgError1, setmsgError1] = React.useState(false);
   const [msgError2, setmsgError2] = React.useState(false);
@@ -93,47 +104,82 @@ const ExpenseForm = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className="paperForm">
-          <Title text="Add one expense" font="h3" align="center" />
+          <Title
+            text="Cargar gasto"
+            font="h3"
+            align="center"
+            color={colors.white1}
+          />
           <Title
             text={
               total > 0
-                ? "In this form you can add an expense from your salary"
-                : "Your balance is 0 can't add expense"
+                ? "Aqui puedes añadir un gasto de tu salario"
+                : "Su saldo es 0, no puede añadir gastos"
             }
             font="h6"
             align="center"
-            color={total > 0 ? colors.grey2 : colors.red}
+            color={total > 0 ? colors.white : colors.red}
           />
 
           <div className="inputGroup">
             <TextField
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              inputProps={{
+                style: { color: msgError1 ? colors.red : colors.white1 },
+              }}
               error={msgError1 ? true : false}
               id="outlined-basic"
-              label="Expense"
-              variant="outlined"
+              label="Monto"
+              variant="filled"
               helperText={msgError1 ? msgError1 : ""}
               onChange={(event) => {
                 setForm({ ...form, amount: event.target.value });
               }}
+              FormHelperTextProps={{
+                style: { fontWeight: 600 },
+              }}
             />
             <TextField
               error={msgError2 ? true : false}
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              inputProps={{
+                style: { color: msgError2 ? colors.red : colors.white1 },
+              }}
               id="outlined-basic"
-              label="Concept"
-              variant="outlined"
+              label="Concepto"
+              variant="filled"
               helperText={msgError2 ? msgError2 : ""}
               onChange={(event) => {
                 setForm({ ...form, concept: event.target.value });
+              }}
+              FormHelperTextProps={{
+                style: { fontWeight: 600 },
               }}
             />
             <TextField
               error={msgError3 ? true : false}
               id="outlined-select-currency"
               select
-              label="Currency"
+              label="Moneda"
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              SelectProps={{
+                style: { color: colors.white1 },
+              }}
+              FormHelperTextProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              variant="filled"
               value={currency}
               onChange={handleChange}
-              helperText={msgError3 ? msgError3 : "Please select your currency"}
+              helperText={
+                msgError3 ? msgError3 : "Por favor, seleccione su moneda"
+              }
             >
               {currencies.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -146,17 +192,11 @@ const ExpenseForm = (props) => {
             <Button
               disabled={!toSend}
               color="primary"
-              text=" Add Expense"
+              text="Agregar gasto"
               variant="contained"
               size="large"
               width={300}
               funct={() => {
-                setForm({
-                  amount: "",
-                  concept: "",
-                  currency: "",
-                  type: "payload",
-                });
                 handleClose();
                 addNewExpense({
                   amount: Number(form.amount),

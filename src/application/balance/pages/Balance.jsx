@@ -11,11 +11,11 @@ const Balance = () => {
       <Paper
         elevation={2}
         square
-        style={{ borderRadius: 20, padding: 40 }}
+        style={{ borderRadius: 20, padding: 30 }}
         className="paper"
       >
-        <Title text="Balance" font="h1" align="center" color={colors.grey}/>
-        <Display charges={600} expenses={200} />
+        <Title text="Mi saldo" font="h3" align="start" color={colors.white1} />
+        <Display />
         <ButtonsContain />
       </Paper>
     </Container>
