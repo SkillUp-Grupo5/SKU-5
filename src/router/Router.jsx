@@ -10,10 +10,6 @@ import { PrivateRoute } from './PrivateRoute'
 import { PublicRoute } from './PublicRoute'
 
 export const Router = () => {
-	const [logged, setLogged] = useState(false)
-	const handleLogged = (status) => {
-		setLogged(status)
-	}
 	return (
 		<>
 			<BrowserRouter>
@@ -23,8 +19,8 @@ export const Router = () => {
 					<Route
 						path="/login"
 						element={
-							<PublicRoute logged={logged}>
-								<LoginPage handle={handleLogged} />
+							<PublicRoute>
+								<LoginPage />
 							</PublicRoute>
 						}
 					/>
@@ -32,8 +28,8 @@ export const Router = () => {
 					<Route
 						path="/register"
 						element={
-							<PublicRoute logged={logged}>
-								<RegisterPage handle={handleLogged} />
+							<PublicRoute>
+								<RegisterPage />
 							</PublicRoute>
 						}
 					/>
@@ -41,8 +37,8 @@ export const Router = () => {
 					<Route
 						path="/*"
 						element={
-							<PrivateRoute logged={logged}>
-								<DashboardRoute handle={handleLogged} />
+							<PrivateRoute>
+								<DashboardRoute />
 							</PrivateRoute>
 						}
 					/>

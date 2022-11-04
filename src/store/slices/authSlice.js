@@ -1,34 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
 
 export const authSlice = createSlice({
-  name: 'auth',
-  initialState: {
-    checking: true,
-    uid: null,
-    name: null,
-  },
-  reducers: {
-    authLogin: (state, action) => {
-
-      state.checking = false;
-      state.uid = action.payload.uid;
-      state.name = action.payload.name;
-    },
-    authCheckingFinish: (state) => {
-
-      state.checking = false;
-    },
-    authLogout: (state) => {
-
-      state.uid = null;
-      state.name = null;
-      state.checking = false;
-    },
-
-  },
+	name: 'auth',
+	initialState: {
+		id: null,
+		email: '',
+		first_name: '',
+		last_name: '',
+		roleId: null,
+		points: null,
+		checking: false,
+	},
+	reducers: {
+		authLogin: (state, action) => {
+			state.checking = true
+			state.id = action.payload.id
+			state.email = action.payload.email
+			state.first_name = action.payload.first_name
+			state.last_name = action.payload.last_name
+			state.roleId = action.payload.roleId
+			state.points = action.payload.points
+		},
+		authCheckingFinish: (state) => {
+			state.checking = false
+		},
+		authLogout: (state) => {
+			state.id = null
+			state.email = ''
+			state.first_name = ''
+			state.last_name = ''
+			state.roleId = null
+			state.points = null
+			state.checking = false
+		},
+	},
 })
 
-export const {
-  authLogin,
-  authCheckingFinish,
-  authLogout } = authSlice.actions;
+export const { authLogin, authCheckingFinish, authLogout } = authSlice.actions

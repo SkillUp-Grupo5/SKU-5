@@ -1,12 +1,40 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import { Avatar, Box, Button, Grid, Link, TextField, Typography } from '@mui/material'
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
-import { LayoutPage } from '../../utils'
+import { useFormik } from 'formik'
+
+import { Box, Button, Grid, Link, TextField } from '@mui/material'
 import { Link as LinkRouter } from 'react-router-dom'
 import Title from '../../utils/Title'
+import { LoginService, RecuperarDatosUser } from '../../../api/auth'
+import { YupRegisterValidations } from '../../../helpers'
+import { useDispatch } from 'react-redux'
+import { authLogin } from '../../../store/slices/authSlice'
 
-export const LoginPage = ({ handle }) => {
+export const LoginPage = () => {
+	const dispatch = useDispatch()
+
+	const formik = useFormik({
+		initialValues: {
+			email: 'testjabb@test.com',
+			password: '123456789',
+		},
+
+		// validationSchema: YupRegisterValidations,
+		onSubmit: async (values, { resetForm }) => {
+			try {
+				await LoginService(values)
+
+				const { data } = await RecuperarDatosUser()
+				console.log(data)
+
+				dispatch(authLogin(data))
+			} catch (error) {
+				console.log(error)
+			}
+			resetForm()
+		},
+	})
+
 	return (
 		<Box
 			container
@@ -60,20 +88,35 @@ export const LoginPage = ({ handle }) => {
 						alt=""
 					/>
 				</Box>
-				<Box component="form" sx={{ mt: 3, width: '50%' }}>
+				<Box component="form" sx={{ mt: 3, width: '50%' }} onSubmit={formik.handleSubmit}>
 					<Grid container display="flex" alignItems="center" justifyContent="center" spacing={2}>
 						<Grid item xs={8}>
-							<TextField required fullWidth id="email" label="Email Address" name="email" autoComplete="email" />
+							<TextField
+								// required
+								fullWidth
+								id="email"
+								label="Email Address"
+								name="email"
+								autoComplete="email"
+								value={formik.values.email}
+								onChange={formik.handleChange}
+								error={formik.touched.email && Boolean(formik.errors.email)}
+								helperText={formik.touched.email && formik.errors.email}
+							/>
 						</Grid>
 						<Grid item xs={8}>
 							<TextField
-								required
+								// required
 								fullWidth
 								name="password"
-								label="Password"
+								label="password"
 								type="password"
 								id="password"
-								autoComplete="new-password"
+								autoComplete="password"
+								value={formik.values.password}
+								onChange={formik.handleChange}
+								error={formik.touched.password && Boolean(formik.errors.password)}
+								helperText={formik.touched.password && formik.errors.password}
 							/>
 						</Grid>
 						<Grid item xs={8}>
@@ -84,12 +127,11 @@ export const LoginPage = ({ handle }) => {
 								sx={{
 									mt: 3,
 									mb: 2,
-									backgroundColor: '#ea4c88',
+									backgroundColor: '#2AE3C8',
 									':hover': {
-										backgroundColor: '#d44179',
+										backgroundColor: '#00DFC0',
 									},
 								}}
-								onClick={() => handle(true)}
 							>
 								Sign In
 							</Button>
@@ -105,5 +147,10 @@ export const LoginPage = ({ handle }) => {
 				</Box>
 			</Box>
 		</Box>
+		// <form onSubmit={handleSubmit}>
+		// 	<input name="email" type="email" placeholder="email" onChange={(e) => handleOnchange(e)} value={form.email} />
+		// 	<input name="password" type="password" placeholder="password" onChange={(e) => handleOnchange(e)} value={form.password} />
+		// 	<button type="submit">Login</button>
+		// </form>
 	)
 }
