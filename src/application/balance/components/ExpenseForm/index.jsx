@@ -7,6 +7,12 @@ import Button from "../../../utils/Buttom";
 import Title from "../../../utils/Title";
 import "./ExpenseForm.css";
 import { colors } from "../../../../utils/colors";
+import {
+  validation,
+  validationAmount,
+  validationConcept,
+  validationCurrency,
+} from "../../validations";
 const style = {
   position: "absolute",
   top: "50%",
@@ -27,9 +33,14 @@ const ExpenseForm = (props) => {
   const { open, setOpen } = props;
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState("EUR");
+  const [msgError1, setmsgError1] = React.useState(false);
+  const [msgError2, setmsgError2] = React.useState(false);
+  const [msgError3, setmsgError3] = React.useState(false);
+  const [toSend, settoSend] = React.useState(false);
   const [form, setForm] = React.useState({
     amount: "",
     concept: "",
+    currency: "",
     type: "payload",
   });
   const handleChange = (event) => {
@@ -54,6 +65,18 @@ const ExpenseForm = (props) => {
       label: "¥",
     },
   ];
+  React.useEffect(() => {
+    if (form.amount.length > 0) {
+      validationAmount(form.amount, setmsgError1);
+    }
+    if (form.currency.length > 0) {
+      validationCurrency(form.currency, setmsgError3);
+    }
+    if (form.concept.length > 0) {
+      validationConcept(form.concept, setmsgError2);
+    }
+    validation({ ...form }, settoSend);
+  }, [form]);
   return (
     <div>
       <Modal
@@ -73,28 +96,33 @@ const ExpenseForm = (props) => {
 
           <div className="inputGroup">
             <TextField
+              error={msgError1}
               id="outlined-basic"
               label="Expense"
               variant="outlined"
+              helperText={msgError1 ? msgError1 : ""}
               onChange={(event) => {
                 setForm({ ...form, amount: event.target.value });
               }}
             />
             <TextField
+              error={msgError2}
               id="outlined-basic"
               label="Concept"
               variant="outlined"
+              helperText={msgError2 ? msgError2 : ""}
               onChange={(event) => {
                 setForm({ ...form, concept: event.target.value });
               }}
             />
             <TextField
+              error={msgError3}
               id="outlined-select-currency"
               select
               label="Currency"
               value={currency}
               onChange={handleChange}
-              helperText="Please select your currency"
+              helperText={msgError3 ? msgError3 : "Please select your currency"}
             >
               {currencies.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -105,13 +133,19 @@ const ExpenseForm = (props) => {
           </div>
           <div className="buttonSpace">
             <Button
+              disabled={!toSend}
               color="primary"
               text=" Add Expense"
               variant="contained"
               size="large"
               width={300}
               funct={() => {
-                console.log(form);
+                setForm({
+                  amount: "",
+                  concept: "",
+                  currency: "",
+                  type: "payload",
+                });
                 handleClose();
               }}
             />

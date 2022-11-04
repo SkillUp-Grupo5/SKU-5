@@ -2,9 +2,10 @@ import React from "react";
 import { Button } from "@mui/material";
 
 const Buttom = (props) => {
-  const { color, variant, text, funct, href, size, width } = props;
+  const { color, variant, text, funct, href, size, width, disabled } = props;
   return (
     <Button
+      disabled={disabled}
       style={{ borderRadius: 10, width: width }}
       size={size}
       color={color}
