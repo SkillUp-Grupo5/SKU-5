@@ -2,19 +2,19 @@ import * as yup from "yup";
 
 const schemaAmount = yup
   .string()
-  .required("Is required")
-  .matches(/^\d+$/, "Value not a number")
-  .min(2, "Must be at least 2 digits")
-  .max(6, "Must not exceed 6 digits");
+  .required("Este campo es requerido")
+  .matches(/^\d+$/, "El valor no es un número")
+  .min(2, "Debe ser como mínimo 2 dígitos")
+  .max(6, "No debe superar 6 dígitos");
 
 const schemaConcept = yup
   .string()
-  .required("Is required")
-  .matches(/^[aA-zZ]+$/, "Must contain only letters")
-  .min(5, "Must be at least 5 digits")
-  .max(10, "Must not exceed 10 digits");
+  .required("Este campo es requerido")
+  .matches(/^[aA-zZ]+$/, "Debe contener sólo letras")
+  .min(5, "Debe ser como mínimo 5 dígitos")
+  .max(10, "No debe superar 10 dígitos");
 
-const schemaCurrency = yup.string().required("Is required");
+const schemaCurrency = yup.string().required("Este campo es requerido");
 const schemaForm = yup.object().shape({
   amount: schemaAmount,
   concept: schemaConcept,
