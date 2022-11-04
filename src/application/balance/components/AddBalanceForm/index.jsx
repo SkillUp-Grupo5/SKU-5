@@ -30,7 +30,7 @@ const style = {
   p: 3,
 };
 const AddBalanceForm = (props) => {
-  const { addNewCharge } = useBalanceStore();
+  const { addNewCharge, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState("EUR");
@@ -67,6 +67,9 @@ const AddBalanceForm = (props) => {
       label: "¥",
     },
   ];
+  React.useEffect(() => {
+    addNewTotal();
+  }, [addNewCharge]);
 
   React.useEffect(() => {
     if (form.amount.length > 0) {
@@ -150,7 +153,11 @@ const AddBalanceForm = (props) => {
                   type: "topup",
                 });
                 handleClose();
-                addNewCharge(Number(form.amount));
+                addNewCharge({
+                  amount: Number(form.amount),
+                  type: form.type,
+                  concept: form.concept,
+                });
               }}
             />
           </div>
