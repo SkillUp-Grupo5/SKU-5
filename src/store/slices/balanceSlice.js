@@ -1,35 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const balanceSlice = createSlice({
-  name: 'balance',
+  name: "balance",
   initialState: {
-    // checking: true,
-    // uid: null,
-    // name: null,
+    charges: 0,
+    expenses: 0,
+    total: 0,
   },
   reducers: {
-    // authLogin: (state, action) => {
-
-    //   state.checking = false;
-    //   state.uid = action.payload.uid;
-    //   state.name = action.payload.name;
-    // },
-    // authCheckingFinish: (state) => {
-
-    //   state.checking = false;
-    // },
-    // authLogout: (state) => {
-
-    //   state.uid = null;
-    //   state.name = null;
-    //   state.checking = false;
-    // },
-
+    addCharges: (state, action) => {
+      state.charges += action.payload;
+      state.total += action.payload;
+    },
+    addExpenses: (state, action) => {
+      state.expenses += action.payload;
+      state.total -= action.payload;
+    },
+    addTotal: (state, action) => {
+      state.total = action.payload;
+    },
   },
-})
+});
 
-export const {
-  // authLogin,
-  // authCheckingFinish,
-  // authLogout 
-} = balanceSlice.actions;
+export const { addCharges, addExpenses, addTotal } = balanceSlice.actions;

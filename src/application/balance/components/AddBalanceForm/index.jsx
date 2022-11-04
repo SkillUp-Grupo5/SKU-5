@@ -13,6 +13,7 @@ import {
   validationConcept,
   validationCurrency,
 } from "../../validations";
+import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 const style = {
   position: "absolute",
   top: "50%",
@@ -29,6 +30,7 @@ const style = {
   p: 3,
 };
 const AddBalanceForm = (props) => {
+  const { addNewCharge } = useBalanceStore();
   const { open, setOpen } = props;
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState("EUR");
@@ -97,7 +99,7 @@ const AddBalanceForm = (props) => {
           />
           <div className="inputGroup">
             <TextField
-              error={msgError1}
+              error={msgError1 ? true : false}
               id="outlined-basic"
               label="Charge"
               variant="outlined"
@@ -107,7 +109,7 @@ const AddBalanceForm = (props) => {
               }}
             />
             <TextField
-              error={msgError2}
+              error={msgError2 ? true : false}
               id="outlined-basic"
               label="Concept"
               variant="outlined"
@@ -117,7 +119,7 @@ const AddBalanceForm = (props) => {
               }}
             />
             <TextField
-              error={msgError3}
+              error={msgError3 ? true : false}
               id="outlined-select-currency"
               select
               label="Currency"
@@ -148,6 +150,7 @@ const AddBalanceForm = (props) => {
                   type: "topup",
                 });
                 handleClose();
+                addNewCharge(Number(form.amount));
               }}
             />
           </div>

@@ -26,11 +26,9 @@ export const validationConcept = async (value, error) => {
     .validate(value)
     .then(() => {
       error(false);
-      console.log("true");
     })
     .catch((err) => {
       error(err.errors[0]);
-      console.log(err.errors[0]);
     });
 };
 export const validationCurrency = async (value, error) => {
@@ -38,11 +36,9 @@ export const validationCurrency = async (value, error) => {
     .validate(value)
     .then(() => {
       error(false);
-      console.log("true");
     })
     .catch((err) => {
       error(err.errors[0]);
-      console.log(err.errors[0]);
     });
 };
 export const validationAmount = async (value, error) => {
@@ -50,11 +46,9 @@ export const validationAmount = async (value, error) => {
     .validate(value)
     .then(() => {
       error(false);
-      console.log("true");
     })
     .catch((err) => {
       error(err.errors[0]);
-      console.log(err.errors[0]);
     });
 };
 
@@ -63,8 +57,6 @@ export const validation = async (formValues, state) => {
     .validate(formValues)
     .then(() => {
       state(true);
-
-      console.log("true");
     })
     .catch((err) => {
       state(false);
