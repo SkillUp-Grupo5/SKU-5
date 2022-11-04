@@ -7,7 +7,7 @@ const Balance = lazy(() => import('../application/balance/pages/Balance'))
 // const Bills = lazy(() => import('../modules/Bills/Index'))
 const Movements = lazy(() => import('../application/movements/Index'))
 
-export const DashboardRoute = ({ handle }) => {
+export const DashboardRoute = () => {
 	return (
 		<LayoutPage>
 			<Routes>

@@ -25,6 +25,8 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
 
 import { useState } from 'react'
 import { Button } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { authLogout } from '../../store/slices/authSlice'
 
 const drawerWidth = 240
 
@@ -92,6 +94,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 }))
 
 export const Navbar = ({ children }) => {
+	const dispatch = useDispatch()
+
 	const theme = useTheme()
 	const [open, setOpen] = useState(false)
 
@@ -126,6 +130,10 @@ export const Navbar = ({ children }) => {
 		setOpen(false)
 	}
 
+	const handleLogOut = () => {
+		dispatch(authLogout())
+	}
+
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<CssBaseline />
@@ -156,6 +164,7 @@ export const Navbar = ({ children }) => {
 									backgroundColor: '#d44179',
 								},
 							}}
+							onClick={handleLogOut}
 						>
 							Log out
 						</Button>

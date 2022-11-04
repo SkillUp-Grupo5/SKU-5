@@ -15,7 +15,7 @@ export const axiosClient = axios.create({
 axiosClient.interceptors.response.use(
 	(response) => {
 		console.log(response)
-		response.data.token && localStorage.setItem('token', response.data.token)
+		response.data.accessToken && localStorage.setItem('token', response.data.accessToken)
 		return response
 	},
 	(error) => {
@@ -40,7 +40,7 @@ axiosClientToken.interceptors.response.use(
 axiosClientToken.interceptors.request.use(
 	(request) => {
 		const token = localStorage.getItem('token')
-		request.headers['access-token'] = `Bearer ${token}`
+		request.headers['Authorization'] = `Bearer ${token}`
 		return request
 	},
 	(error) => {
