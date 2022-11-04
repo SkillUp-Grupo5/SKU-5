@@ -1,12 +1,7 @@
-.container {
-  width: 185vh;
-  margin-top: 10px;
-  margin-bottom: -5px;
-}
-.paper {
+.footer {
   background: linear-gradient(
     360deg,
-    #eeeeeea7,
+    #eeeeeed5,
     #efefef,
     #ffffff,
     #ffffff,
