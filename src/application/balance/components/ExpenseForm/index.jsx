@@ -31,7 +31,7 @@ const style = {
 };
 
 const ExpenseForm = (props) => {
-  const { addNewExpense } = useBalanceStore();
+  const { addNewExpense, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState("EUR");
@@ -68,6 +68,9 @@ const ExpenseForm = (props) => {
     },
   ];
   React.useEffect(() => {
+    addNewTotal();
+  }, [addNewExpense]);
+  React.useEffect(() => {
     if (form.amount.length > 0) {
       validationAmount(form.amount, setmsgError1);
     }
@@ -77,7 +80,9 @@ const ExpenseForm = (props) => {
     if (form.concept.length > 0) {
       validationConcept(form.concept, setmsgError2);
     }
-    validation({ ...form }, settoSend);
+    if (total > 0) {
+      validation({ ...form }, settoSend);
+    }
   }, [form]);
   return (
     <div>
@@ -90,10 +95,14 @@ const ExpenseForm = (props) => {
         <Box sx={style} className="paperForm">
           <Title text="Add one expense" font="h3" align="center" />
           <Title
-            text="In this form you can add an expense from your salary"
+            text={
+              total > 0
+                ? "In this form you can add an expense from your salary"
+                : "Your balance is 0 can't add expense"
+            }
             font="h6"
             align="center"
-            color={colors.grey2}
+            color={total > 0 ? colors.grey2 : colors.red}
           />
 
           <div className="inputGroup">

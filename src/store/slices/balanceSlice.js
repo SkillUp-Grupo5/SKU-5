@@ -9,12 +9,10 @@ export const balanceSlice = createSlice({
   },
   reducers: {
     addCharges: (state, action) => {
-      state.charges += action.payload;
-      state.total += action.payload;
+      state.charges = action.payload;
     },
     addExpenses: (state, action) => {
-      state.expenses += action.payload;
-      state.total -= action.payload;
+      state.expenses = action.payload;
     },
     addTotal: (state, action) => {
       state.total = action.payload;

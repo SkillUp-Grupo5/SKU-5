@@ -6,6 +6,7 @@ import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 
 const Display = () => {
   const { total, expenses, charges } = useBalanceStore();
+
   return (
     <>
       <div className="container">
