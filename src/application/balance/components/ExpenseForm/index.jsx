@@ -13,6 +13,7 @@ import {
   validationConcept,
   validationCurrency,
 } from "../../validations";
+import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 const style = {
   position: "absolute",
   top: "50%",
@@ -30,6 +31,7 @@ const style = {
 };
 
 const ExpenseForm = (props) => {
+  const { addNewExpense } = useBalanceStore();
   const { open, setOpen } = props;
   const handleClose = () => setOpen(false);
   const [currency, setCurrency] = React.useState("EUR");
@@ -96,7 +98,7 @@ const ExpenseForm = (props) => {
 
           <div className="inputGroup">
             <TextField
-              error={msgError1}
+              error={msgError1 ? true : false}
               id="outlined-basic"
               label="Expense"
               variant="outlined"
@@ -106,7 +108,7 @@ const ExpenseForm = (props) => {
               }}
             />
             <TextField
-              error={msgError2}
+              error={msgError2 ? true : false}
               id="outlined-basic"
               label="Concept"
               variant="outlined"
@@ -116,7 +118,7 @@ const ExpenseForm = (props) => {
               }}
             />
             <TextField
-              error={msgError3}
+              error={msgError3 ? true : false}
               id="outlined-select-currency"
               select
               label="Currency"
@@ -147,6 +149,7 @@ const ExpenseForm = (props) => {
                   type: "payload",
                 });
                 handleClose();
+                addNewExpense(Number(form.amount));
               }}
             />
           </div>
