@@ -149,7 +149,11 @@ const ExpenseForm = (props) => {
                   type: "payload",
                 });
                 handleClose();
-                addNewExpense(Number(form.amount));
+                addNewExpense({
+                  amount: Number(form.amount),
+                  type: form.type,
+                  concept: form.concept,
+                });
               }}
             />
           </div>

@@ -37,7 +37,7 @@ const Display = () => {
         >
           <Title text={"Total"} font="h5" align="center" />
           <Title
-            text={charges - expenses}
+            text={total ? total : 0}
             font="h2"
             color={colors.blue}
             align="center"

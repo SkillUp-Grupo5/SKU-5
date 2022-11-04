@@ -1,11 +1,11 @@
-import { axiosClient } from "../helpers";
+import { axiosClientToken } from "../helpers";
 
-export const initDeposit = async (data) => {
+export const addDeposit = async (data) => {
   console.log(data);
-  const deposit = await axiosClient.post("/fixeddeposits", data);
+  const deposit = await axiosClientToken.post("/transactions", { ...data });
   return deposit;
 };
 export const updateDeposit = async (data) => {
   const { id } = data;
-  axiosClient.put(`/fixeddeposits/${id}`, data);
+  axiosClientToken.put(`/transactions/${id}`, data);
 };

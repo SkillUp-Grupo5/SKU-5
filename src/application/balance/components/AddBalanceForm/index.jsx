@@ -150,7 +150,11 @@ const AddBalanceForm = (props) => {
                   type: "topup",
                 });
                 handleClose();
-                addNewCharge(Number(form.amount));
+                addNewCharge({
+                  amount: Number(form.amount),
+                  type: form.type,
+                  concept: form.concept,
+                });
               }}
             />
           </div>
