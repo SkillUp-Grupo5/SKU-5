@@ -1,4 +1,6 @@
 import { axiosClient, axiosClientToken } from "../helpers";
+import Swal from 'sweetalert2';
+
 
 export const startGetUsers = async (page = 1) => {
   try {
@@ -18,12 +20,27 @@ export const startGetUsers = async (page = 1) => {
 
 export const startSendMoney = async (transaction, id) => {
   try {
-    console.log(transaction, id);
-
+    
     const data = await axiosClientToken.post(`/accounts/${id}`, transaction);
-    // const data = await axiosClientToken.get(`/accounts/${id}`);
-    console.log(data);
+
+    if(data?.data?.message === 'OK') {
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        text: 'Envio de dinero exitoso!',
+        showConfirmButton: false,
+        timer: 2000,
+      })
+    }
   } catch (error) {
     console.log(error);
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Error al enviar dinero',
+      text: error.response.data.error,
+      showConfirmButton: false,
+      timer: 2000,
+    })
   }
 };

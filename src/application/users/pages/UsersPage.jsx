@@ -1,14 +1,14 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box } from "@mui/material";
+import React from "react";
 
-import { UsersTable } from '../components/UsersTable'
+import { UsersTable } from "../components/UsersTable";
 
 const UsersPage = () => {
   return (
-    <Box>
-        <UsersTable />
-    </Box>
-  )
-}
+    <>
+      <UsersTable />
+    </>
+  );
+};
 
-export default UsersPage
+export default UsersPage;
