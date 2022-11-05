@@ -9,34 +9,32 @@ import {
 
 export const useBalanceStore = () => {
   const dispatch = useDispatch();
+  const { id } = useSelector((state) => state.auth);
   const { total, expenses, charges } = useSelector((state) => state.balance);
-  const { id, roleId } = useSelector((state) => state.auth);
 
   const addNewCharge = async (data) => {
     const { concept, type, amount } = data;
-    const date = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;
     await addDeposit({
+      accountId: 132,
       amount: amount,
       concept: concept,
-      date: date,
+      date: new Date(),
+      to_account_id: 2,
       type: type,
-      accountId: roleId,
       userId: id,
-      to_account_id: 5,
     });
   };
 
   const addNewExpense = async (data) => {
     const { concept, type, amount } = data;
-    const date = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDay()} ${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`;
     await addDeposit({
       amount: amount,
       concept: concept,
-      date: date,
+      date: new Date(),
       type: type,
-      accountId: roleId,
+      accountId: 132,
       userId: id,
-      to_account_id: 5,
+      to_account_id: 2,
     });
   };
 

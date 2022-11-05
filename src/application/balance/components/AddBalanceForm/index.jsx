@@ -78,9 +78,6 @@ const AddBalanceForm = (props) => {
       label: "¥",
     },
   ];
-  React.useEffect(() => {
-    addNewTotal();
-  }, [addNewCharge]);
 
   React.useEffect(() => {
     if (form.amount.length > 0) {
@@ -200,7 +197,7 @@ const AddBalanceForm = (props) => {
                 });
                 handleClose();
                 addNewCharge({
-                  amount: Number(form.amount),
+                  amount: form.amount,
                   type: form.type,
                   concept: form.concept,
                 });
