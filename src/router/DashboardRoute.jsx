@@ -5,7 +5,8 @@ import { LayoutPage } from '../application/utils/LayoutPage'
 const Home = lazy(() => import('../application/home/pages/Home'))
 const Balance = lazy(() => import('../application/balance/pages/Balance'))
 // const Bills = lazy(() => import('../modules/Bills/Index'))
-const Movements = lazy(() => import('../application/movements/pages/Movements'))
+const Movements = lazy(() => import('../application/movements/Index'))
+const UsersPage = lazy(() => import('../application/users/pages/UsersPage'))
 
 export const DashboardRoute = () => {
 	return (
@@ -33,6 +34,15 @@ export const DashboardRoute = () => {
 					element={
 						<React.Suspense fallback={<></>}>
 							<Movements />
+						</React.Suspense>
+					}
+				/>
+
+				<Route
+					path="/users"
+					element={
+						<React.Suspense fallback={<></>}>
+							<UsersPage />
 						</React.Suspense>
 					}
 				/>
