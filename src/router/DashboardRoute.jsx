@@ -1,11 +1,13 @@
 import React, { lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { LayoutPage } from '../application/utils/LayoutPage'
+import CircularProgress from '@mui/material/CircularProgress'
+import Box from '@mui/material/Box'
 
 const Home = lazy(() => import('../application/home/pages/Home'))
 const Balance = lazy(() => import('../application/balance/pages/Balance'))
 // const Bills = lazy(() => import('../modules/Bills/Index'))
-const Movements = lazy(() => import('../application/movements/Index'))
+const Movements = lazy(() => import('../application/movements/pages/Movements'))
 const UsersPage = lazy(() => import('../application/users/pages/UsersPage'))
 
 export const DashboardRoute = () => {
@@ -15,7 +17,13 @@ export const DashboardRoute = () => {
 				<Route
 					path="/home"
 					element={
-						<React.Suspense fallback={<></>}>
+						<React.Suspense
+							fallback={
+								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+									<CircularProgress />
+								</Box>
+							}
+						>
 							<Home />
 						</React.Suspense>
 					}
@@ -24,7 +32,13 @@ export const DashboardRoute = () => {
 				<Route
 					path="/balance"
 					element={
-						<React.Suspense fallback={<></>}>
+						<React.Suspense
+							fallback={
+								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+									<CircularProgress />
+								</Box>
+							}
+						>
 							<Balance />
 						</React.Suspense>
 					}
@@ -32,7 +46,13 @@ export const DashboardRoute = () => {
 				<Route
 					path="/movements"
 					element={
-						<React.Suspense fallback={<></>}>
+						<React.Suspense
+							fallback={
+								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+									<CircularProgress />
+								</Box>
+							}
+						>
 							<Movements />
 						</React.Suspense>
 					}
@@ -41,13 +61,18 @@ export const DashboardRoute = () => {
 				<Route
 					path="/users"
 					element={
-						<React.Suspense fallback={<></>}>
+						<React.Suspense
+							fallback={
+								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
+									<CircularProgress />
+								</Box>
+							}
+						>
 							<UsersPage />
 						</React.Suspense>
 					}
 				/>
 			</Routes>
-			{/* <button onClick={() => handle(false)}>Loggout</button> */}
 		</LayoutPage>
 	)
 }

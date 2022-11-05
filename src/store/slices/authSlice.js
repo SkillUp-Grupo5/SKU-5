@@ -25,6 +25,9 @@ export const authSlice = createSlice({
 		authCheckingFinish: (state) => {
 			state.checking = false
 		},
+		checkingAuth: (state, { payload }) => {
+			state.checking = payload
+		},
 		authLogout: (state) => {
 			state.id = null
 			state.email = ''
@@ -41,4 +44,4 @@ export const authSlice = createSlice({
 	},
 })
 
-export const { authLogin, authCheckingFinish, authLogout, getAllTransactions } = authSlice.actions
+export const { authLogin, authCheckingFinish, authLogout, checkingAuth, getAllTransactions } = authSlice.actions
