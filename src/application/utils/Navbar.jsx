@@ -21,8 +21,7 @@ import ListItemText from '@mui/material/ListItemText'
 import HomeIcon from '@mui/icons-material/Home'
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney'
-import GroupIcon from '@mui/icons-material/Group';
+import GroupIcon from '@mui/icons-material/Group'
 
 import { useState } from 'react'
 import { Button } from '@mui/material'
@@ -105,11 +104,6 @@ export const Navbar = ({ children }) => {
 			name: 'Inicio',
 			link: '/home',
 			icon: <HomeIcon />,
-		},
-		{
-			name: 'Gastos',
-			link: '/bills',
-			icon: <AttachMoneyIcon />,
 		},
 		{
 			name: 'Balance',
