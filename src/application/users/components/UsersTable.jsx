@@ -24,6 +24,7 @@ import Paper from "@mui/material/Paper";
 import { SendMoneyModal } from "./SendMoneyModal";
 
 import { startGetUsers } from "../../../api/users";
+import { useAuthStore } from '../../../hooks';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,6 +47,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const UsersTable = () => {
+
+  const { id } = useAuthStore();
+
+  console.log(id)
+
   const [usersData, setUsersData] = useState([])
 	const [page, setPage] = useState(1)
 
