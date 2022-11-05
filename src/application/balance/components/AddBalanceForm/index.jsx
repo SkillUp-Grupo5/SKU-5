@@ -30,9 +30,20 @@ const style = {
   p: 3,
 };
 const AddBalanceForm = (props) => {
-  const { addNewCharge } = useBalanceStore();
+  const { addNewCharge, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    setForm({
+      amount: "",
+      concept: "",
+      currency: "",
+      type: "topup",
+    });
+    setmsgError1(false);
+    setmsgError2(false);
+    setmsgError3(false);
+  };
   const [currency, setCurrency] = React.useState("EUR");
   const [msgError1, setmsgError1] = React.useState(false);
   const [msgError2, setmsgError2] = React.useState(false);
@@ -67,6 +78,9 @@ const AddBalanceForm = (props) => {
       label: "¥",
     },
   ];
+  React.useEffect(() => {
+    addNewTotal();
+  }, [addNewCharge]);
 
   React.useEffect(() => {
     if (form.amount.length > 0) {
@@ -90,42 +104,77 @@ const AddBalanceForm = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style} className="paperForm">
-          <Title text="Add one charge" font="h3" align="center" />
           <Title
-            text="In this form you can add a charge on your salary"
+            text="Cagar saldo"
+            font="h3"
+            align="center"
+            color={colors.white1}
+          />
+          <Title
+            text="Aqui puedes cargar dinero en tu cuenta"
             font="h6"
             align="center"
-            color={colors.grey2}
+            color={colors.white}
           />
           <div className="inputGroup">
             <TextField
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              inputProps={{
+                style: { color: msgError1 ? colors.red : colors.white1 },
+              }}
               error={msgError1 ? true : false}
               id="outlined-basic"
-              label="Charge"
-              variant="outlined"
+              label="Monto"
+              variant="filled"
               helperText={msgError1 ? msgError1 : ""}
               onChange={(event) => {
                 setForm({ ...form, amount: event.target.value });
               }}
+              FormHelperTextProps={{
+                style: { fontWeight: 600 },
+              }}
             />
             <TextField
               error={msgError2 ? true : false}
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              inputProps={{
+                style: { color: msgError2 ? colors.red : colors.white1 },
+              }}
               id="outlined-basic"
-              label="Concept"
-              variant="outlined"
+              label="Concepto"
+              variant="filled"
               helperText={msgError2 ? msgError2 : ""}
               onChange={(event) => {
                 setForm({ ...form, concept: event.target.value });
               }}
+              FormHelperTextProps={{
+                style: { fontWeight: 600 },
+              }}
             />
             <TextField
               error={msgError3 ? true : false}
+              InputLabelProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
+              SelectProps={{
+                style: { color: colors.white1 },
+              }}
               id="outlined-select-currency"
               select
-              label="Currency"
+              label="Moneda"
+              variant="filled"
               value={currency}
               onChange={handleChange}
-              helperText={msgError3 ? msgError3 : "Please select your currency"}
+              helperText={
+                msgError3 ? msgError3 : "Por favor, seleccione su moneda"
+              }
+              FormHelperTextProps={{
+                style: { color: "#fff", fontWeight: 600 },
+              }}
             >
               {currencies.map((option) => (
                 <MenuItem key={option.value} value={option.value}>
@@ -138,7 +187,7 @@ const AddBalanceForm = (props) => {
             <Button
               disabled={!toSend}
               color="primary"
-              text=" Add Charge"
+              text="Agregar dinero"
               variant="contained"
               size="large"
               width={300}
@@ -150,7 +199,11 @@ const AddBalanceForm = (props) => {
                   type: "topup",
                 });
                 handleClose();
-                addNewCharge(Number(form.amount));
+                addNewCharge({
+                  amount: Number(form.amount),
+                  type: form.type,
+                  concept: form.concept,
+                });
               }}
             />
           </div>
