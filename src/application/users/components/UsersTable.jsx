@@ -18,18 +18,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-// import { makeStyles } from '@material-ui/core/styles';
-import { makeStyles } from '@mui/styles';
-
 import { SendMoneyModal } from "./SendMoneyModal";
 
 import { startGetUsers } from "../../../api/users";
-
-const useStyles = makeStyles({
-    root: {
-      maxHeight: 200,
-    },
-  });
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -53,7 +44,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 
 export const UsersTable = () => {
-    const classes = useStyles();
 
   const [usersData, setUsersData] = useState([]);
   const [page, setPage] = useState(1);
