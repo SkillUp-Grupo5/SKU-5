@@ -5,7 +5,7 @@ import { LayoutPage } from '../application/utils/LayoutPage'
 const Home = lazy(() => import('../application/home/pages/Home'))
 const Balance = lazy(() => import('../application/balance/pages/Balance'))
 // const Bills = lazy(() => import('../modules/Bills/Index'))
-const Movements = lazy(() => import('../application/movements/Index'))
+const Movements = lazy(() => import('../application/movements/pages/Movements'))
 
 export const DashboardRoute = () => {
 	return (

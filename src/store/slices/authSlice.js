@@ -10,6 +10,7 @@ export const authSlice = createSlice({
 		roleId: null,
 		points: null,
 		checking: false,
+		transactions: [],
 	},
 	reducers: {
 		authLogin: (state, action) => {
@@ -32,8 +33,12 @@ export const authSlice = createSlice({
 			state.roleId = null
 			state.points = null
 			state.checking = false
+			localStorage.clear()
+		},
+		getAllTransactions: (state, { payload }) => {
+			state.transactions = payload
 		},
 	},
 })
 
-export const { authLogin, authCheckingFinish, authLogout } = authSlice.actions
+export const { authLogin, authCheckingFinish, authLogout, getAllTransactions } = authSlice.actions

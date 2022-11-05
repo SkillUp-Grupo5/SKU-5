@@ -1,31 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-
-
+import { useDispatch, useSelector } from 'react-redux'
 
 export const useAuthStore = () => {
+	const dispatch = useDispatch()
+	const { checking, uid, name } = useSelector((state) => state.auth)
 
-    const dispatch = useDispatch();
-    const { checking, uid, name } = useSelector(state => state.auth);
+	const StartLogin = async (email, password) => {}
 
+	const startLogout = () => {}
 
-    const StartLogin = async (email, password) => {
+	return {
+		//* Properties
+		checking,
+		uid,
+		name,
 
-    }
-
-    const startLogout = () => {
-
-
-    }
-
-
-    return {
-        //* Properties
-        checking,
-        uid,
-        name,
-
-        //* Metods
-        StartLogin,
-        startLogout,
-    }
+		//* Metods
+		StartLogin,
+		startLogout,
+	}
 }
