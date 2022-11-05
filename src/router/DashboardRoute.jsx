@@ -7,19 +7,15 @@ import { useAuthStore } from '../hooks'
 
 const Home = lazy(() => import('../application/home/pages/Home'))
 const Balance = lazy(() => import('../application/balance/pages/Balance'))
-// const Bills = lazy(() => import('../modules/Bills/Index'))
 const Movements = lazy(() => import('../application/movements/pages/Movements'))
 const UsersPage = lazy(() => import('../application/users/pages/UsersPage'))
 
 export const DashboardRoute = () => {
-
-	const { StartLogin } = useAuthStore();
+	const { StartLogin } = useAuthStore()
 
 	useEffect(() => {
-		StartLogin();
-	
+		StartLogin()
 	}, [])
-	
 
 	return (
 		<LayoutPage>
@@ -38,7 +34,6 @@ export const DashboardRoute = () => {
 						</React.Suspense>
 					}
 				/>
-				<Route path="/bills" element={<React.Suspense fallback={<></>}>{/* <Bills /> */}</React.Suspense>} />
 				<Route
 					path="/balance"
 					element={
