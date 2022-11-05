@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react'
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from '@mui/material'
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import Tooltip from "@mui/material/Tooltip";
 
-import IconButton from "@mui/material/IconButton";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import IconButton from '@mui/material/IconButton'
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
+import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance'
 
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -46,18 +46,21 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const UsersTable = () => {
+  const [usersData, setUsersData] = useState([])
+	const [page, setPage] = useState(1)
 
-  const [usersData, setUsersData] = useState([]);
-  const [page, setPage] = useState(1);
+	const [modalStatus, setModalStatus] = useState(false)
+	const [activeUser, setActiveUser] = useState(null)
 
-  const [modalStatus, setModalStatus] = useState(false);
-  const [activeUser, setActiveUser] = useState(null);
+	const loadUsers = async (pagePath) => {
+		const data = await startGetUsers(pagePath)
 
-  const loadUsers = async (pagePath) => {
-    const data = await startGetUsers(pagePath);
+		setUsersData(data)
+	}
 
-    setUsersData(data);
-  };
+	useEffect(() => {
+		loadUsers(page)
+	}, [page])
 
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -65,23 +68,18 @@ export const UsersTable = () => {
   const xl = useMediaQuery(theme.breakpoints.down("xl"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
 
-  useEffect(() => {
-    loadUsers(page);
-  }, [page]);
 
-  // console.log(usersData);
+	const handleNextPage = (e) => {
+		e.preventDefault()
 
-  const handleNextPage = (e) => {
-    e.preventDefault();
+		setPage(page + 1)
+	}
 
-    setPage(page + 1);
-  };
+	const handlePreviusPage = (e) => {
+		e.preventDefault()
 
-  const handlePreviusPage = (e) => {
-    e.preventDefault();
-
-    setPage(page - 1);
-  };
+		setPage(page - 1)
+	}
 
   const handleSendMoney = (user) => {
     setActiveUser(user);
