@@ -30,7 +30,7 @@ export default function DataTable() {
 	}, [])
 
 	return (
-		<div style={{ height: 400, width: '100%' }}>
+		<div style={{ height: 400, width: '100%', padding: '2rem' }}>
 			<Typography sx={{ flex: '1 1 100%' }} variant="h6" id="tableTitle" component="div">
 				Transacciones
 			</Typography>
