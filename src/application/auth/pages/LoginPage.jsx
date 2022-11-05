@@ -37,7 +37,6 @@ export const LoginPage = () => {
 
 	return (
 		<Box
-			container
 			width="100%"
 			height="100vh"
 			display="flex"

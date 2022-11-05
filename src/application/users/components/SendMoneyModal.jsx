@@ -1,15 +1,22 @@
 import React, { useState } from "react";
+
 import {
   Button,
   Container,
+  Grid,
   MenuItem,
   Modal,
   TextField,
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { startSendMoney } from "../../../api/users";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
+
 import { useFormik } from "formik";
+
+import { startSendMoney } from "../../../api/users";
+
 import { YupSendMoneyValidations } from "../../../helpers";
 
 const currencies = [
@@ -36,30 +43,58 @@ const currencies = [
 ];
 
 export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
-
-
   const [currency, setCurrency] = useState("ARS");
 
   const formik = useFormik({
     initialValues: {
-      amount: 1,
+      amount: 0,
       context: "",
     },
 
     validationSchema: YupSendMoneyValidations,
     onSubmit: (values, { resetForm }) => {
       try {
-        startSendMoney({
-          type: "payment",
-          concept: values.context,
-          amount: values.amount,
-        }, activeUser.id);
+        startSendMoney(
+          {
+            type: "payment",
+            concept: values.context,
+            amount: values.amount,
+          },
+          activeUser.id
+        );
+        setModalStatus(false)
       } catch (error) {
         console.log(error);
       }
       resetForm();
     },
   });
+
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+  const xl = useMediaQuery(theme.breakpoints.down("xl"));
+  const lg = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const handleModalWidth = () => {
+    switch (true) {
+
+      case sm:
+        return "100%";
+  
+      case md:
+        return "75vw";
+  
+      case lg:
+        return "57.5vw";
+  
+      case xl:
+        return "60vw";
+  
+      default:
+        break;
+    }
+  }
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -78,7 +113,6 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
         aria-describedby="modal-modal-description"
       >
         <Box
-          container
           width="100%"
           height="100vh"
           display="flex"
@@ -87,25 +121,29 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
         >
           <Box
             component="form"
-            container
-            width="60%"
-            height="45vh"
+            width={handleModalWidth}
             display="flex"
             justifyContent="space-between"
             flexDirection="column"
             bgcolor="#fff"
-            borderRadius="5px"
+            borderRadius={(sm) ? 'none' : '5px'}
             border="none"
             noValidate
             autoComplete="off"
             onSubmit={formik.handleSubmit}
+            sx={{
+              position: (sm) && 'absolute',
+              top: (sm) && 0,
+              left: (sm) && 0,
+              height: (sm) ? '100vh' : '45vh',
+            }}
           >
             <Box
               width="100%"
-              height="7.5vh"
+              height={ (sm) ? "12.5vh" : "7.5vh" }
               display="flex"
               justifyContent="center"
-              alignItems="end"
+              alignItems={ (sm) ? "center" : "end" }
             >
               <Typography color="GrayText" variant="body2" fontSize="20px">
                 Enviar dinero a {activeUser?.first_name}
@@ -118,14 +156,19 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
               alignItems="center"
               flexDirection="column"
               gap="10px"
+              sx={{
+                '& .MuiTextField-root': {
+                  width: (sm) ? '70%' : '24ch',
+                },
+              }}
             >
               <Box
                 width="100%"
-                heigth="30vh"
+                height={ (sm) ? "35vh" : "10vh" }
                 display="flex"
-                justifyContent="center"
-                alignItems="flex-start"
-                flexDirection="row"
+                justifyContent={ (sm) ? "space-around" : "center" }
+                alignItems={ (sm) ? "center" : "flex-start" }
+                flexDirection={ (sm) ? "column" : "row" }
                 gap="10px"
               >
                 <TextField
@@ -175,7 +218,7 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
 
             <Box
               width="100%"
-              height="10vh"
+              height={ (sm) ? "20vh" : "10vh" }
               display="flex"
               justifyContent="center"
               alignItems="center"
