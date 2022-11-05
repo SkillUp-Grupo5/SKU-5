@@ -8,6 +8,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { startSendMoney } from "../../../api/users";
+import { useFormik } from "formik";
+import { YupSendMoneyValidations } from "../../../helpers";
 
 const currencies = [
   {
@@ -33,21 +36,37 @@ const currencies = [
 ];
 
 export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
+
+
   const [currency, setCurrency] = useState("ARS");
+
+  const formik = useFormik({
+    initialValues: {
+      amount: 1,
+      context: "",
+    },
+
+    validationSchema: YupSendMoneyValidations,
+    onSubmit: (values, { resetForm }) => {
+      try {
+        startSendMoney({
+          type: "payment",
+          concept: values.context,
+          amount: values.amount,
+        }, activeUser.id);
+      } catch (error) {
+        console.log(error);
+      }
+      resetForm();
+    },
+  });
 
   const handleChange = (event) => {
     setCurrency(event.target.value);
   };
 
   const handleClose = () => {
-
     setModalStatus(false);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    console.log(`Money to ${activeUser.name} has sended successfully!`)
   };
 
   return (
@@ -79,6 +98,7 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
             border="none"
             noValidate
             autoComplete="off"
+            onSubmit={formik.handleSubmit}
           >
             <Box
               width="100%"
@@ -88,7 +108,7 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
               alignItems="end"
             >
               <Typography color="GrayText" variant="body2" fontSize="20px">
-                Send Money to {activeUser?.name}
+                Enviar dinero a {activeUser?.first_name}
               </Typography>
             </Box>
 
@@ -113,8 +133,12 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
                   id="outlined-required"
                   type="number"
                   variant="outlined"
-                  label="Amount"
+                  label="Monto"
                   name="amount"
+                  value={formik.values.amount}
+                  onChange={formik.handleChange}
+                  error={formik.touched.amount && Boolean(formik.errors.amount)}
+                  helperText={formik.touched.amount && formik.errors.amount}
                 />
 
                 <TextField
@@ -122,10 +146,10 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
                   select
                   required
                   disabled={true}
-                  label="Currency"
+                  label="Moneda"
                   value={currency}
                   onChange={handleChange}
-                  helperText="Only 'ARS' currency allowed."
+                  helperText="Solo pesos permitidos (ARS)."
                 >
                   {currencies.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -140,8 +164,12 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
                 id="outlined-required"
                 type="text"
                 variant="outlined"
-                label="Context"
+                label="Contexto"
                 name="context"
+                value={formik.values.context}
+                onChange={formik.handleChange}
+                error={formik.touched.context && Boolean(formik.errors.context)}
+                helperText={formik.touched.context && formik.errors.context}
               />
             </Box>
 
@@ -153,12 +181,12 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
               alignItems="center"
               gap="20px"
             >
-              <Button type="submit" variant="contained" onClick={handleSubmit}>
-                Send
+              <Button type="submit" variant="contained">
+                Enviar
               </Button>
 
               <Button variant="outlined" onClick={handleClose}>
-                Cancel
+                Cancelar
               </Button>
             </Box>
           </Box>

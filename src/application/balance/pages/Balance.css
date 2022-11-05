@@ -1,15 +1,8 @@
 .container {
-  width: 185vh;
-  margin-top: 10px;
+  width: 175vh;
+  margin-top: 0px;
   margin-bottom: -5px;
 }
 .paper {
-  background: linear-gradient(
-    360deg,
-    #eeeeeea7,
-    #efefef,
-    #ffffff,
-    #ffffff,
-    #ffffff
-  );
+  background: linear-gradient(10deg, #328fecc7, #1976d2e9,#1976d2, #1367bc);
 }
