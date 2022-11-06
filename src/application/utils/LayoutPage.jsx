@@ -1,24 +1,24 @@
-import React from "react";
+import React from 'react'
 
-import { Box } from "@mui/system";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import { Box } from '@mui/system'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
-import Footer from "./Footer";
-import { Navbar } from "./Navbar";
+import Footer from './Footer'
+import { Navbar } from './Navbar'
+import { NavbarMovil } from './NavbarMovil'
 
 export const LayoutPage = ({ children }) => {
-  const theme = useTheme();
-  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+	const theme = useTheme()
+	const sm = useMediaQuery(theme.breakpoints.down('sm'))
 
-  return (
-    <Box bgcolor="#fff">
-      {
-        !sm ? <Navbar /> : <></> // Insert a movil navbar here
-      }
+	return (
+		<Box bgcolor="#fff">
+			{!sm ? <Navbar /> : <></>}
 
-      {children}
-      <Footer />
-    </Box>
-  );
-};
+			<div>{children}</div>
+
+			{!sm ? <Footer /> : <NavbarMovil />}
+		</Box>
+	)
+}
