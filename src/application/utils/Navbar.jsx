@@ -25,8 +25,7 @@ import GroupIcon from '@mui/icons-material/Group'
 
 import { useState } from 'react'
 import { Button } from '@mui/material'
-import { useDispatch } from 'react-redux'
-import { authLogout } from '../../store/slices/authSlice'
+import { useAuthStore } from '../../hooks'
 
 const drawerWidth = 240
 
@@ -94,7 +93,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 }))
 
 export const Navbar = ({ children }) => {
-	const dispatch = useDispatch()
+	const { StartLogout } = useAuthStore();
 
 	const theme = useTheme()
 	const [open, setOpen] = useState(false)
@@ -131,7 +130,8 @@ export const Navbar = ({ children }) => {
 	}
 
 	const handleLogOut = () => {
-		dispatch(authLogout())
+		
+		StartLogout();
 	}
 
 	return (
