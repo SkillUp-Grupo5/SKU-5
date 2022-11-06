@@ -14,19 +14,7 @@ import { useSelector } from 'react-redux';
 import { Link as LinkRouter } from 'react-router-dom';
 import Buttom from '../../utils/Buttom';
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
-export const TableHome = () => {
+export const TableHome = ({ transactions }) => {
   return (
     <Box marginTop={4}>
       <Box
@@ -71,22 +59,22 @@ export const TableHome = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {transactions.map(transaction => (
               <TableRow
-                key={row.name}
+                key={transaction.id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {transaction.concept}
                 </TableCell>
-                <TableCell align="right" sx={{ paddingRight: '1.5rem' }}>
-                  {row.calories}
+                <TableCell align="right" sx={{ paddingRight: '1rem' }}>
+                  {transaction.amount}
                 </TableCell>
-                <TableCell align="right" sx={{ paddingRight: '1.5rem' }}>
-                  {row.fat}
+                <TableCell align="right" sx={{ paddingRight: '1rem' }}>
+                  {transaction.type === 'topup' ? 'Ingreso' : 'Egreso'}
                 </TableCell>
-                <TableCell align="right" sx={{ paddingRight: '1.5rem' }}>
-                  {row.carbs}
+                <TableCell align="right" sx={{ paddingRight: '1rem' }}>
+                  {new Date(transaction.date).toLocaleString()}
                 </TableCell>
               </TableRow>
             ))}
