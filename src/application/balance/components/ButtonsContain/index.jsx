@@ -17,21 +17,19 @@ const ButtonsContain = () => {
       <div className="container">
         <Button
           text="Agregar dinero"
-          color="inherit"
+          bgcolor="#21d749"
           width={250}
-          textColor="#1976d2"
+          textColor={colors.white1}
           variant="contained"
-          bgcolor={colors.white1}
           funct={() => setopenCharge(true)}
         />
 
         <Button
           text="Agregar gasto"
-          textColor="#1976d2"
-          color="inherit"
+          bgcolor="#d32f2f"
           width={250}
+          textColor={colors.white1}
           variant="contained"
-          bgcolor={colors.white1}
           funct={() => setopenExpense(true)}
         />
       </div>

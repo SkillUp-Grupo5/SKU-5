@@ -6,16 +6,25 @@
   align-items: center;
 }
 .paper1 {
-  background: linear-gradient(
-    20deg,
-    #ffffff05,
-    #1976d200,
-    #1976d279,
-    #0066cb,
-    #0066cb
-  );
-  width: 900px;
+  background: linear-gradient(10deg, #1976d28d, #1976d2, #1976d2);
+  width: 700px;
 }
+
 .paper2 {
-  background: linear-gradient(100deg, #ffffff05, #1976d279, #1976d279, #0066cb);
+  padding-inline: 90px;
+  padding-block: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+
+  background: linear-gradient(10deg, #4efb8b, #12cc34, #03ba43);
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.389);
+}
+.paper3 {
+  padding-inline: 90px;
+  padding-block: 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+
+  background: linear-gradient(10deg, #fb4e4e, #cc1212, #ba0303);
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.389);
 }

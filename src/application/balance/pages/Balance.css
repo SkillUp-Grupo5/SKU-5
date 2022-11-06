@@ -1,8 +1,19 @@
 .container {
-  width: 175vh;
-  margin-top: 0px;
-  margin-bottom: -5px;
+  width: 115vh;
+  margin-top: -20px;
+  margin-bottom: 15px;
 }
 .paper {
-  background: linear-gradient(10deg, #328fecc7, #1976d2e9,#1976d2, #1367bc);
+  background: linear-gradient(120deg, #94949400, #94949400, #e7e7e7, #f1f1f1);
+  margin-left: 60px;
+}
+.graphic {
+  border-radius: 20px;
+  padding: 0px;
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background: linear-gradient(120deg, #94949400, #94949400, #e7e7e7, #f1f1f1);
 }

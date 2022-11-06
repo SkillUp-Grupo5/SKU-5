@@ -32,6 +32,7 @@ const style = {
 const AddBalanceForm = (props) => {
   const { addNewCharge, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
+
   const handleClose = () => {
     setOpen(false);
     setForm({
@@ -195,6 +196,7 @@ const AddBalanceForm = (props) => {
                   currency: "",
                   type: "topup",
                 });
+
                 handleClose();
                 addNewCharge({
                   amount: form.amount,

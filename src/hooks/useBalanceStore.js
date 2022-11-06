@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addDeposit, deleteDeposit, showDeposits } from "../api/balance";
 
@@ -9,6 +10,7 @@ import {
 
 export const useBalanceStore = () => {
   const dispatch = useDispatch();
+
   const { id } = useSelector((state) => state.auth);
   const { total, expenses, charges } = useSelector((state) => state.balance);
 
@@ -25,19 +27,6 @@ export const useBalanceStore = () => {
     });
   };
 
-  const addNewExpense = async (data) => {
-    const { concept, type, amount } = data;
-    await addDeposit({
-      amount: amount,
-      concept: concept,
-      date: new Date(),
-      type: type,
-      accountId: 132,
-      userId: id,
-      to_account_id: 2,
-    });
-  };
-
   const addNewTotal = async () => {
     const deposits = await showDeposits();
     const { charges, expenses } = deposits;
@@ -50,7 +39,7 @@ export const useBalanceStore = () => {
     charges,
     expenses,
     total,
-    addNewExpense,
+
     addNewCharge,
     addNewTotal,
   };
