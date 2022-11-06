@@ -15,6 +15,14 @@ export const startGetUsers = async (page = 1) => {
     };
   } catch (error) {
     console.log(error);
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Role administrador requerido',
+      text: error.response.data.error,
+      showConfirmButton: false,
+      timer: 2000,
+    })
   }
 };
 

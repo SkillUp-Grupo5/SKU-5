@@ -1,18 +1,15 @@
 import React from "react";
-
-import { useFormik } from "formik";
+import { Link as LinkRouter } from "react-router-dom";
 
 import { Box, Button, Grid, Link, TextField } from "@mui/material";
-import { Link as LinkRouter } from "react-router-dom";
+import { useFormik } from "formik";
+
 import Title from "../../utils/Title";
-import { LoginService, RecuperarDatosUser } from "../../../api/auth";
 import { YupRegisterValidations } from "../../../helpers";
-import { useDispatch } from "react-redux";
-import { authLogin } from "../../../store/slices/authSlice";
 import { useAuthStore } from "../../../hooks";
 
+
 export const LoginPage = () => {
-  const dispatch = useDispatch();
 
   const { StartLogin } = useAuthStore();
 

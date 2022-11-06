@@ -1,13 +1,14 @@
-import { Box, Button, Grid, Link, TextField } from '@mui/material'
 import { Link as LinkRouter } from 'react-router-dom'
-import Title from '../../utils/Title'
+
 import { useFormik } from 'formik'
+import { Box, Button, Grid, Link, TextField } from '@mui/material'
+
+import Title from '../../utils/Title'
 import { YupRegisterValidations } from '../../../helpers'
-import { useState } from 'react'
-import { RegisterService } from '../../../api/auth'
+import { useAuthStore } from '../../../hooks'
 
 export const RegisterPage = () => {
-	const [form, setForm] = useState({})
+	const { StartRegister } = useAuthStore();
 
 	const formik = useFormik({
 		initialValues: {
@@ -17,23 +18,15 @@ export const RegisterPage = () => {
 			password: '',
 		},
 
-		validationSchema: YupRegisterValidations,
+		// TODO: Validations doesn't allow submit the form.
+		// validationSchema: YupRegisterValidations,
 		onSubmit: async (values, { resetForm }) => {
-			try {
-				const {
-					data: { data },
-				} = await RegisterService(form)
-				console.log(data)
-			} catch (error) {
-				console.log(error)
-			}
-			setForm(values)
-			resetForm()
+			StartRegister(values);
+			resetForm();
 		},
 	})
 	return (
 		<Box
-			container
 			width="100%"
 			height="100vh"
 			display="flex"
