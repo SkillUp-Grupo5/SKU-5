@@ -39,7 +39,7 @@ const ExpenseForm = (props) => {
       amount: "",
       concept: "",
       currency: "",
-      type: "payload",
+      type: "payment",
     });
     setmsgError1(false);
     setmsgError2(false);
@@ -54,7 +54,7 @@ const ExpenseForm = (props) => {
     amount: "",
     concept: "",
     currency: "",
-    type: "payload",
+    type: "payment",
   });
   const handleChange = (event) => {
     setCurrency(event.target.value);
@@ -78,9 +78,7 @@ const ExpenseForm = (props) => {
       label: "¥",
     },
   ];
-  React.useEffect(() => {
-    addNewTotal();
-  }, [addNewExpense]);
+
   React.useEffect(() => {
     if (form.amount.length > 0) {
       validationAmount(form.amount, setmsgError1);
