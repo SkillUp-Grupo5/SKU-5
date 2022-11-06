@@ -31,7 +31,7 @@ const style = {
 };
 
 const ExpenseForm = (props) => {
-  const { addNewExpense, addNewTotal, total } = useBalanceStore();
+  const { addNewCharge, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
   const handleClose = () => {
     setOpen(false);
@@ -196,7 +196,7 @@ const ExpenseForm = (props) => {
               width={300}
               funct={() => {
                 handleClose();
-                addNewExpense({
+                addNewCharge({
                   amount: Number(form.amount),
                   type: form.type,
                   concept: form.concept,

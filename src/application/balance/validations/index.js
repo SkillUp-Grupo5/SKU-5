@@ -4,14 +4,14 @@ const schemaAmount = yup
   .string()
   .required("Este campo es requerido")
   .matches(/^\d+$/, "El valor no es un número")
-  .min(2, "Debe ser como mínimo 2 dígitos")
+  .min(2, "Debe ser mínimo 2 dígitos")
   .max(6, "No debe superar 6 dígitos");
 
 const schemaConcept = yup
   .string()
   .required("Este campo es requerido")
   .matches(/^[aA-zZ]+$/, "Debe contener sólo letras")
-  .min(5, "Debe ser como mínimo 5 dígitos")
+  .min(5, "Debe ser mínimo 5 dígitos")
   .max(10, "No debe superar 10 dígitos");
 
 const schemaCurrency = yup.string().required("Este campo es requerido");
