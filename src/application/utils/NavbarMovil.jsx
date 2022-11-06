@@ -7,9 +7,12 @@ import HomeIcon from '@mui/icons-material/Home'
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import GroupIcon from '@mui/icons-material/Group'
+import LogoutIcon from '@mui/icons-material/Logout'
 import { Link } from 'react-router-dom'
+import { useAuthStore } from '../../hooks'
 
 export const NavbarMovil = () => {
+	const { StartLogout } = useAuthStore()
 	const [value, setValue] = React.useState(0)
 
 	const routes = [
@@ -52,6 +55,7 @@ export const NavbarMovil = () => {
 						</Link>
 					)
 				})}
+				<BottomNavigationAction sx={{ color: '#fff' }} icon={<LogoutIcon />} onClick={StartLogout} />
 			</BottomNavigation>
 		</Box>
 	)
