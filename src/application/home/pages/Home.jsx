@@ -33,7 +33,7 @@ const Home = () => {
         alignItems="center"
       >
         <Container maxWidth="md">
-          <Box height="90vh" padding={4}>
+          <Box height="90vh">
             <Box width="100%">
               <AccountActions />
               <TableHome transactions={transactions} />
