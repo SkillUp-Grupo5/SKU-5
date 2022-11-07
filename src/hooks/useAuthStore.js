@@ -58,7 +58,7 @@ export const useAuthStore = () => {
         position: "center",
         icon: "error",
         title: "Error al iniciar sesión",
-        text: error.response.data.error,
+        text: error?.response?.data?.error,
         showConfirmButton: false,
         timer: 2000,
       });
