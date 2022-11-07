@@ -1,12 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { Navigate } from 'react-router-dom'
-import { checkingAuth } from '../store/slices/authSlice'
+import { Navigate } from "react-router-dom";
 
-export const PrivateRoute = ({ children }) => {
-	const dispatch = useDispatch()
-	const store = useSelector((state) => state.auth)
+/**
+ * This is a private route, only the users logged are allowed to access to them.
+ * If the "id" of the user exist on store, then the user can pass this middleware.
+ */
+export const PrivateRoute = ({children, isAutenticated}) => {
 
-	localStorage.getItem('token') && dispatch(checkingAuth(true))
-
-	return store.checking ? children : <Navigate to="/login" />
-}
+    return isAutenticated ? children : <Navigate to="/login" />
+};

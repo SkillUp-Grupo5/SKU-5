@@ -4,7 +4,11 @@ import Swal from "sweetalert2";
 
 import { axiosClient, axiosClientToken } from "../helpers";
 
-import { authLogin, authLogout } from "../store/slices/authSlice";
+import {
+  authCheckingFinish,
+  authLogin,
+  authLogout,
+} from "../store/slices/authSlice";
 
 /**
  * On this useHook you can put http requests and once you get
@@ -15,68 +19,56 @@ export const useAuthStore = () => {
   const { id, email, first_name, last_name, roleId, points, checking } =
     useSelector((state) => state.auth);
 
+  /**
+   * This function is used to log the user into the application
+   * using their credentials.
+   */
   const StartLogin = async (data) => {
-    const localToken = localStorage.getItem("token");
+    try {
+      /**
+       * We send the credentials to the API which give us an accessToken.
+       */
+      const {
+        data: { accessToken },
+      } = await axiosClient.post("/auth/login", data);
 
-    /**
-     * If the localToken exist on localStorage we get the user data
-     * from the API.
-     */
-    if (localToken) {
-      try {
+      /**
+       * Once we have the accesToken then we get the user data fron
+       * the API.
+       */
+      if (accessToken) {
         const newData = await axiosClientToken.get("/auth/me");
 
         /**
          * Send the user data to the store
          */
         dispatch(authLogin(newData.data));
-      } catch (error) {
-        return console.log(error);
-      }
-    } else {
-      /**
-       * If the localToken doesn't exist then we send the credentials
-       * to the API which give us an accessToken.
-       */
-      try {
-        const {
-          data: { accessToken },
-        } = await axiosClient.post("/auth/login", data);
 
-        /**
-         * Once we have the accesToken then we get the user data fron
-         * the API.
-         */
-        if (accessToken) {
-          const newData = await axiosClientToken.get("/auth/me");
-
-          /**
-           * Send the user data to the store
-           */
-          dispatch(authLogin(newData.data));
-
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            text: "Inicio de sesión exitoso!",
-            showConfirmButton: false,
-            timer: 2000,
-          });
-        }
-      } catch (error) {
-        console.log(error);
         Swal.fire({
           position: "center",
-          icon: "error",
-          title: "Error al iniciar sesión",
-          text: error.response.data.error,
+          icon: "success",
+          text: "Inicio de sesión exitoso!",
           showConfirmButton: false,
           timer: 2000,
         });
       }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Error al iniciar sesión",
+        text: error?.response?.data?.error,
+        showConfirmButton: false,
+        timer: 2000,
+      });
     }
   };
 
+  /**
+   * This function is used to register the user into the application
+   * creating credentials.
+   */
   const StartRegister = async (data) => {
     /**
      * First we create an account
@@ -109,16 +101,41 @@ export const useAuthStore = () => {
     }
   };
 
+  /**
+   * This function is used to refresh the user session using an access token.
+   */
+  const StartChecking = async () => {
+    /**
+     * If the token doesn't exist on localStorage
+     * we don't continue with the function.
+     */
+    if (!localStorage.getItem("token")) return dispatch(authCheckingFinish());
+
+    try {
+      /**
+       * We get the data from the API.
+       */
+      const newData = await axiosClientToken.get("/auth/me");
+
+      if (newData.status === 200) {
+        /**
+         * Send the user data to the store
+         */
+        dispatch(authLogin(newData.data));
+      }
+      dispatch(authCheckingFinish());
+    } catch (error) {
+      dispatch(authCheckingFinish());
+      console.log(error.response.data.msg);
+    }
+  };
+
+  /**
+   * This function is used to logout the user cleaning his credentials from
+   * store and his token from localStorage.
+   */
   const StartLogout = () => {
     dispatch(authLogout());
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      text: "Cierre de sesión exitoso!",
-      showConfirmButton: false,
-      timer: 2000,
-    });
   };
 
   return {
@@ -138,6 +155,7 @@ export const useAuthStore = () => {
      */
     StartLogin,
     StartRegister,
+    StartChecking,
     StartLogout,
   };
 };

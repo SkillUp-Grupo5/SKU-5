@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { LayoutPage } from '../application/utils/LayoutPage'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
-import { useAuthStore } from '../hooks'
+
 
 const Home = lazy(() => import('../application/home/pages/Home'))
 const Balance = lazy(() => import('../application/balance/pages/Balance'))
@@ -11,11 +11,6 @@ const Movements = lazy(() => import('../application/movements/pages/Movements'))
 const UsersPage = lazy(() => import('../application/users/pages/UsersPage'))
 
 export const DashboardRoute = () => {
-	const { StartLogin } = useAuthStore()
-
-	useEffect(() => {
-		StartLogin()
-	}, [])
 
 	return (
 		<LayoutPage>
