@@ -14,25 +14,29 @@ import {
   validationCurrency,
 } from "../../validations";
 import { useBalanceStore } from "../../../../hooks/useBalanceStore";
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  display: "flex",
-  justifyContent: "space-around",
-  flexDirection: "column",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  height: 400,
-  bgcolor: "background.paper",
-  borderRadius: 10,
-  boxShadow: 24,
-  p: 3,
-};
+import { useMediaQuery, useTheme } from "@mui/material";
+
 const AddBalanceForm = (props) => {
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const { addNewCharge, addNewTotal, total } = useBalanceStore();
   const { open, setOpen } = props;
 
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    display: "flex",
+    justifyContent: "space-around",
+    flexDirection: "column",
+    transform: "translate(-50%, -50%)",
+    width: sm ? "70%" : "55%",
+    height: "58%",
+    bgcolor: "background.paper",
+    borderRadius: 10,
+    boxShadow: 24,
+    p: 3,
+  };
   const handleClose = () => {
     setOpen(false);
     setForm({
@@ -110,17 +114,27 @@ const AddBalanceForm = (props) => {
           />
           <Title
             text="Aqui puedes cargar dinero en tu cuenta"
-            font="h6"
+            font={sm ? "h7" : "h6"}
+            weight={sm ? 600 : 500}
             align="center"
             color={colors.white}
           />
-          <div className="inputGroup">
+          <div
+            style={{
+              flexDirection: sm ? "column" : "row",
+              display: "flex",
+              justifyContent: "space-around",
+            }}
+          >
             <TextField
+              InputProps={{ style: { marginBottom: sm ? 30 : 0 } }}
               InputLabelProps={{
                 style: { color: "#fff", fontWeight: 600 },
               }}
               inputProps={{
-                style: { color: msgError1 ? colors.red : colors.white1 },
+                style: {
+                  color: msgError1 ? colors.red : colors.white1,
+                },
               }}
               error={msgError1 ? true : false}
               id="outlined-basic"
@@ -131,11 +145,16 @@ const AddBalanceForm = (props) => {
                 setForm({ ...form, amount: event.target.value });
               }}
               FormHelperTextProps={{
-                style: { fontWeight: 600 },
+                style: {
+                  fontWeight: 600,
+                  marginTop: sm ? -25 : 0,
+                  marginBottom: sm ? 5 : 0,
+                },
               }}
             />
             <TextField
               error={msgError2 ? true : false}
+              InputProps={{ style: { marginBottom: sm ? 30 : 0 } }}
               InputLabelProps={{
                 style: { color: "#fff", fontWeight: 600 },
               }}
@@ -150,11 +169,16 @@ const AddBalanceForm = (props) => {
                 setForm({ ...form, concept: event.target.value });
               }}
               FormHelperTextProps={{
-                style: { fontWeight: 600 },
+                style: {
+                  fontWeight: 600,
+                  marginTop: sm ? -25 : 0,
+                  marginBottom: sm ? 5 : 0,
+                },
               }}
             />
             <TextField
               error={msgError3 ? true : false}
+              InputProps={{ style: { marginBottom: 30 } }}
               InputLabelProps={{
                 style: { color: "#fff", fontWeight: 600 },
               }}
