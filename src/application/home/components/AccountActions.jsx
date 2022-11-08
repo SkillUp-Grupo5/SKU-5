@@ -1,13 +1,9 @@
 import { Button, Card, Link, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { Link as LinkRouter } from 'react-router-dom';
-import Buttom from '../../utils/Buttom';
 
-export const AccountActions = () => {
-  const { total, charges, expenses } = useSelector(state => state.balance);
-
+export const AccountActions = ({ balance }) => {
   return (
     <Card width="100%">
       <Box
@@ -23,18 +19,18 @@ export const AccountActions = () => {
             Saldo:
           </Typography>
           <Typography variant="h4" color="primary">
-            ${total}
+            ${balance}
           </Typography>
         </Box>
         <Box display="flex" alignItems="end" gap={2} paddingTop={2}>
           <Link as={LinkRouter} to="/balance" underline="none">
             <Button variant="contained" sx={{ fontSize: { xs: 12, md: 14 } }}>
-              Depositar
+              Ingresar Dinero
             </Button>
           </Link>
           <Link as={LinkRouter} to="/transactions" underline="none">
             <Button variant="contained" sx={{ fontSize: { xs: 12, md: 14 } }}>
-              Transferir
+              Enviar Dinero
             </Button>
           </Link>
         </Box>

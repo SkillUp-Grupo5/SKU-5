@@ -1,25 +1,23 @@
-import React from "react";
-import { Link as LinkRouter } from "react-router-dom";
+import React from 'react';
+import { Link as LinkRouter } from 'react-router-dom';
 
-import { Box, Button, Grid, Link, TextField } from "@mui/material";
-import { useFormik } from "formik";
+import { Box, Button, Grid, Link, TextField } from '@mui/material';
+import { useFormik } from 'formik';
 
-import Title from "../../utils/Title";
-import { YupRegisterValidations } from "../../../helpers";
-import { useAuthStore } from "../../../hooks";
-
+import Title from '../../utils/Title';
+import { YupLoginValidations } from '../../../helpers';
+import { useAuthStore } from '../../../hooks';
 
 export const LoginPage = () => {
-
   const { StartLogin } = useAuthStore();
 
   const formik = useFormik({
     initialValues: {
-      email: "testjabb@test.com",
-      password: "123456789",
+      email: 'testjabb@test.com',
+      password: '123456789',
     },
 
-    // validationSchema: YupRegisterValidations,
+    validationSchema: YupLoginValidations,
     onSubmit: async (values, { resetForm }) => {
       StartLogin(values);
       resetForm();
@@ -33,49 +31,28 @@ export const LoginPage = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      sx={{
-        position: "absolute",
-        left: 0,
-        top: 0,
-        backgroundColor: "#2c3338",
-        "& .MuiFormLabel-root": {
-          color: "gray",
-          ":hover": {
-            color: "gray",
-            borderColor: "none",
-          },
-        },
-        "& .MuiOutlinedInput-root": {
-          color: "#eee",
-          borderColor: "none",
-          backgroundColor: "#3b4148",
-          ":hover": {
-            borderColor: "none",
-            background: "#434a52",
-          },
-        },
-      }}
     >
       <Box
-        width="90%"
-        height="70%"
+        width="100%"
+        height="100%"
         display="flex"
         flexDirection="column"
+        justifyContent="center"
         alignItems="center"
+        overflow="hidden"
       >
         <Box
           width="100%"
-          maxHeight="30vh"
-          minHeight="30vh"
+          minHeight="40vh"
           display="flex"
           alignItems="center"
           justifyContent="center"
           sx={{
-            "& img": {
-              maxWidth: "30ch",
-              objectFit: "cover",
-              objectPosition: "20% 10%",
-              borderRadius: "50%",
+            '& img': {
+              maxWidth: '30ch',
+              objectFit: 'cover',
+              objectPosition: '20% 10%',
+              borderRadius: '50%',
             },
             mb: 2,
           }}
@@ -87,20 +64,21 @@ export const LoginPage = () => {
         </Box>
         <Box
           component="form"
-          sx={{ mt: 3, width: "60%" }}
+          sx={{ mt: 3, width: '90%' }}
           onSubmit={formik.handleSubmit}
         >
           <Grid
             container
             display="flex"
-            flexDirection='column'
+            flexDirection="column"
             alignItems="center"
             justifyContent="center"
-            spacing={2}
+            gap={2}
           >
-            <Grid item xs={12} sm={6}>
+            <Grid item sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}>
               <TextField
                 // required
+
                 fullWidth
                 id="email"
                 label="Email Address"
@@ -112,7 +90,7 @@ export const LoginPage = () => {
                 helperText={formik.touched.email && formik.errors.email}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            <Grid item sx={{ width: { xs: '100%', sm: '50%', md: '30%' } }}>
               <TextField
                 // required
                 fullWidth
@@ -134,12 +112,12 @@ export const LoginPage = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
+                size="large"
                 sx={{
-                  mt: 3,
                   mb: 2,
-                  backgroundColor: "#2AE3C8",
-                  ":hover": {
-                    backgroundColor: "#00DFC0",
+                  backgroundColor: '#2AE3C8',
+                  ':hover': {
+                    backgroundColor: '#00DFC0',
                   },
                 }}
               >
@@ -147,7 +125,7 @@ export const LoginPage = () => {
               </Button>
             </Grid>
           </Grid>
-          <Grid container justifyContent="flex-end">
+          <Grid container justifyContent="center">
             <Grid item>
               <Link as={LinkRouter} to="/register" variant="body2">
                 <Title

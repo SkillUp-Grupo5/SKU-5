@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/globals.css';
 import '../../../styles/application/home/pages/Home.css';
-import { UsersTable } from '../../utils';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import { AccountActions } from '../components/AccountActions';
 import { TableHome } from '../components/TableHome';
 import { axiosClientToken } from '../../../helpers/axiosHelper';
+import { showDeposits } from '../../../api/balance';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
   const [transactions, setTransactions] = useState([]);
+  const { total } = useSelector(state => state.balance);
+
+  const [balance, setBalance] = useState(0);
   const getTransactions = async () => {
     try {
-      const {
-        data: { data },
-      } = await axiosClientToken.get('/transactions');
-      setTransactions(data);
+      const { data } = await axiosClientToken.get('/transactions');
+      const allMovements = data.data;
+      setTransactions(allMovements.slice(0, 5));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const getBalance = async () => {
+    try {
+      const deposits = await showDeposits();
+      const { charges, expenses } = deposits;
+      const totalBalance = charges - expenses;
+      setBalance(totalBalance);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    getBalance();
     getTransactions();
-  }, []);
-  console.log(transactions);
+  }, [total]);
   return (
     <div className="App">
       <Box
@@ -32,14 +45,17 @@ const Home = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Container maxWidth="md">
-          <Box height="90vh">
-            <Box width="100%">
-              <AccountActions />
-              <TableHome transactions={transactions} />
-            </Box>
-          </Box>
-        </Container>
+        <Box
+          height="80vh"
+          sx={{ width: { xs: '95%', sm: '80%' } }}
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          <AccountActions balance={balance} />
+          <TableHome transactions={transactions} />
+        </Box>
+
         {/* <UsersTable /> */}
       </Box>
     </div>
