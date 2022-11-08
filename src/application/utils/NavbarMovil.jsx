@@ -1,62 +1,82 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import BottomNavigation from '@mui/material/BottomNavigation'
-import BottomNavigationAction from '@mui/material/BottomNavigationAction'
+import * as React from "react";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 
-import HomeIcon from '@mui/icons-material/Home'
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
-import SwapVertIcon from '@mui/icons-material/SwapVert'
-import GroupIcon from '@mui/icons-material/Group'
-import LogoutIcon from '@mui/icons-material/Logout'
-import { Link } from 'react-router-dom'
-import { useAuthStore } from '../../hooks'
+import HomeIcon from "@mui/icons-material/Home";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import GroupIcon from "@mui/icons-material/Group";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { Link } from "react-router-dom";
+import { useAuthStore } from "../../hooks";
 
 export const NavbarMovil = () => {
-	const { StartLogout } = useAuthStore()
-	const [value, setValue] = React.useState(0)
+  const { StartLogout } = useAuthStore();
+  const [value, setValue] = React.useState(0);
 
-	const routes = [
-		{
-			name: 'Inicio',
-			link: '/home',
-			icon: <HomeIcon />,
-		},
-		{
-			name: 'Balance',
-			link: '/balance',
-			icon: <AccountBalanceWalletIcon />,
-		},
-		{
-			name: 'Movimientos',
-			link: '/movements',
-			icon: <SwapVertIcon />,
-		},
-		{
-			name: 'Usuarios',
-			link: '/users',
-			icon: <GroupIcon />,
-		},
-	]
+  const routes = [
+    {
+      name: "Usuarios",
+      link: "/users",
+      icon: <GroupIcon />,
+    },
+    {
+      name: "Balance",
+      link: "/balance",
+      icon: <AccountBalanceWalletIcon />,
+    },
+    {
+      name: "Inicio",
+      link: "/home",
+      icon: <HomeIcon />,
+    },
+    {
+      name: "Movimientos",
+      link: "/movements",
+      icon: <SwapVertIcon />,
+    },
+  ];
 
-	return (
-		<Box sx={{ width: '100%', position: 'absolute', bottom: '-27vh' }}>
-			<BottomNavigation
-				sx={{ backgroundColor: '#1976D2' }}
-				showLabels
-				value={value}
-				onChange={(event, newValue) => {
-					setValue(newValue)
-				}}
-			>
-				{routes.map((r) => {
-					return (
-						<Link to={r.link}>
-							<BottomNavigationAction sx={{ color: '#fff' }} label={r.name} icon={r.icon} />
-						</Link>
-					)
-				})}
-				<BottomNavigationAction sx={{ color: '#fff' }} icon={<LogoutIcon />} onClick={StartLogout} />
-			</BottomNavigation>
-		</Box>
-	)
-}
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        position: "fixed",
+        bottom: "-1px",
+        left: 0,
+      }}
+    >
+      <BottomNavigation
+        sx={{
+          height: "7.5vh",
+          backgroundColor: "#1976D2",
+		  display: 'flex',
+		  alignItems: 'center'
+        }}
+        showLabels
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+      >
+        {routes.map((r, i) => {
+          return (
+            <Link key={i} to={r.link}>
+              <BottomNavigationAction
+                sx={{ color: "#fff" }}
+                label={r.name}
+                icon={r.icon}
+              />
+            </Link>
+          );
+        })}
+        <BottomNavigationAction
+          sx={{ color: "#fff" }}
+          icon={<LogoutIcon />}
+          onClick={StartLogout}
+        />
+      </BottomNavigation>
+    </Box>
+  );
+};

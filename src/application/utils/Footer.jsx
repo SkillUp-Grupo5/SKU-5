@@ -1,9 +1,15 @@
 import React from "react";
 import { Box, Container, Link, Paper } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 import "./utils.css";
 import Title from "./Title";
 import { colors } from "../../utils/colors";
 const Footer = () => {
+
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <footer>
       <Paper elevation={5} className="footer">
@@ -14,7 +20,8 @@ const Footer = () => {
             fontSize: 25,
             letterSpacing: 2,
             fontWeight: 500,
-            padding: 50,
+            padding: "50px",
+            marginBottom: (sm) && '30px',
           }}
         >
           <Link
