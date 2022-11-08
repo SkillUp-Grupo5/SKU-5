@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 
-import { Box, Container, Typography } from '@mui/material'
+import { Box, Container, Typography } from "@mui/material";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import Tooltip from "@mui/material/Tooltip";
 
-import IconButton from '@mui/material/IconButton'
-import ArrowLeftIcon from '@mui/icons-material/ArrowLeft'
-import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance'
+import IconButton from "@mui/material/IconButton";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import Skeleton from "@mui/material/Skeleton";
 
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
@@ -46,21 +47,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const UsersTable = () => {
-  const [usersData, setUsersData] = useState([])
-	const [page, setPage] = useState(1)
+  const [usersData, setUsersData] = useState({
+    users: [],
+    nextPage: null,
+    previousPage: null,
+  });
+  const [page, setPage] = useState(1);
 
-	const [modalStatus, setModalStatus] = useState(false)
-	const [activeUser, setActiveUser] = useState(null)
+  const [modalStatus, setModalStatus] = useState(false);
+  const [activeUser, setActiveUser] = useState(null);
 
-	const loadUsers = async (pagePath) => {
-		const data = await startGetUsers(pagePath)
+  const loadUsers = async (pagePath) => {
+    const data = await startGetUsers(pagePath);
 
-		setUsersData(data)
-	}
+    setUsersData(data);
+  };
 
-	useEffect(() => {
-		loadUsers(page)
-	}, [page])
+  useEffect(() => {
+    loadUsers(page);
+  }, [page]);
 
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -68,18 +73,17 @@ export const UsersTable = () => {
   const xl = useMediaQuery(theme.breakpoints.down("xl"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
 
+  const handleNextPage = (e) => {
+    e.preventDefault();
 
-	const handleNextPage = (e) => {
-		e.preventDefault()
+    setPage(page + 1);
+  };
 
-		setPage(page + 1)
-	}
+  const handlePreviusPage = (e) => {
+    e.preventDefault();
 
-	const handlePreviusPage = (e) => {
-		e.preventDefault()
-
-		setPage(page - 1)
-	}
+    setPage(page - 1);
+  };
 
   const handleSendMoney = (user) => {
     setActiveUser(user);
@@ -95,72 +99,90 @@ export const UsersTable = () => {
       />
       <Box
         sx={{
-          width: (sm) ? "100%" : "90%",
+          width: sm ? "100%" : "90%",
           height: "100vh",
-          display: "flex", 
+          display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          overflowX: 'cover',
-          marginBottom: '10vh',
-          marginLeft: (!sm) && '7.5%',
+          overflowX: "cover",
+          marginBottom: '250px',
+          marginLeft: !sm && "7.5%",
         }}
       >
-        <Table
-          sx={{
-            width: (sm) ? '100%' : '80%',
-          }}
-          aria-label="customized table"
-        >
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Nombre</StyledTableCell>
-              <StyledTableCell align="right">Apellido</StyledTableCell>
-              {!sm && !md && (
-                <StyledTableCell align="right">Email</StyledTableCell>
-              )}
-              <StyledTableCell align="right"></StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {usersData.users?.map((user) => (
-              <TableRow
-                key={user.id}
-                sx={{
-                  "& .MuiSvgIcon-root": {
-                    visibility: "hidden",
-                  },
-                  ":hover": {
-                    backgroundColor: "rgba(0, 0, 0, 0.1)",
-                    cursor: "pointer",
-                    "& .MuiSvgIcon-root": {
-                      visibility: "visible",
-                    },
-                  },
-                }}
-                onDoubleClick={() => handleSendMoney(user)}
-              >
-                <TableCell component="th" scope="row">
-                  {user.first_name} 
-                </TableCell>
-                <TableCell align="right">{user.last_name}</TableCell>
+        {
+        (usersData.users?.length !== 0 || !usersData.users) 
+        ? 
+        (
+          <Table
+            sx={{
+              width: sm ? "100%" : "80%",
+            }}
+            aria-label="customized table"
+          >
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Nombre</StyledTableCell>
+                <StyledTableCell align="right">Apellido</StyledTableCell>
                 {!sm && !md && (
-                  <TableCell align="right">{user.email}</TableCell>
+                  <StyledTableCell align="right">Email</StyledTableCell>
                 )}
-                <TableCell align="right">
-                  <Tooltip title="Enviar dinero" arrow>
-                    <IconButton
-                      color="default"
-                      component="span"
-                      onClick={() => handleSendMoney(user)}
-                    >
-                      <AccountBalanceIcon />
-                    </IconButton>
-                  </Tooltip>
-                </TableCell>
+                <StyledTableCell align="right"></StyledTableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {usersData.users?.map((user) => (
+                <TableRow
+                  key={user.id}
+                  sx={{
+                    "& .MuiSvgIcon-root": {
+                      visibility: "hidden",
+                    },
+                    ":hover": {
+                      backgroundColor: "rgba(0, 0, 0, 0.1)",
+                      cursor: "pointer",
+                      "& .MuiSvgIcon-root": {
+                        visibility: "visible",
+                      },
+                    },
+                  }}
+                  onDoubleClick={() => handleSendMoney(user)}
+                >
+                  <TableCell component="th" scope="row">
+                    {user.first_name}
+                  </TableCell>
+                  <TableCell align="right">{user.last_name}</TableCell>
+                  {!sm && !md && (
+                    <TableCell align="right">{user.email}</TableCell>
+                  )}
+                  <TableCell align="right">
+                    <Tooltip title="Enviar dinero" arrow>
+                      <IconButton
+                        color="default"
+                        component="span"
+                        onClick={() => handleSendMoney(user)}
+                      >
+                        <AccountBalanceIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        ) : (
+          <Box width={sm ? "90%" : "80%"}>
+            <Skeleton height={80} animation="wave" />
+            <Skeleton height={80} animation="wave" />
+            <Skeleton height={80} animation="wave" />
+            <Skeleton height={80} animation="wave" />
+            <Skeleton height={80} animation={false} />
+            <Skeleton height={80} animation={false} />
+            <Skeleton height={80} animation={false} />
+            <Skeleton height={80} animation={false} />
+            <Skeleton height={80} animation={false} />
+            <Skeleton height={80} animation={false} />
+          </Box>
+        )}
         <Box
           width="80%"
           maxWidth="100vw"

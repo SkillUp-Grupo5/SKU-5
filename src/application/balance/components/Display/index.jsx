@@ -4,18 +4,27 @@ import Paper from "@mui/material/Paper";
 import Title from "../../../utils/Title";
 import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 import "./Display.css";
-import { ChartGraphic } from "../ChartGraphic";
+import { useMediaQuery, useTheme } from "@mui/material";
 const Display = () => {
   const { total, expenses, charges } = useBalanceStore();
-
+  const theme = useTheme();
+  const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+  const xl = useMediaQuery(theme.breakpoints.down("xl"));
+  const lg = useMediaQuery(theme.breakpoints.down("lg"));
   return (
-    <div className="display">
+    <div
+      style={{
+        borderRadius: 20,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Paper
         elevation={3}
         square
         style={{
-          paddingInline: 10,
-          paddingBlock: 10,
+          width: sm ? "100%" : "100%",
           borderRadius: 20,
           marginTop: 10,
           marginBottom: 40,
@@ -24,13 +33,13 @@ const Display = () => {
       >
         <Title
           text={"Total disponible"}
-          font="h4"
+          font={sm ? "h6" : "h4"}
           align="center"
           color={colors.white}
         />
         <Title
           text={total ? `$${total}.00` : 0.0}
-          font="h1"
+          font={sm ? "h3" : "h2"}
           weight={600}
           color={colors.white1}
           align="center"
@@ -38,17 +47,31 @@ const Display = () => {
         />
       </Paper>
 
-      <div className="container">
-        <div className="paper2">
+      <div
+        style={{
+          width: "100%",
+          justifyContent: "space-between",
+          display: "flex",
+          flexDirection: sm ? "column" : "row",
+        }}
+      >
+        <div
+          className="paper2"
+          style={{
+            width: sm ? "100%" : "45%",
+            borderRadius: 20,
+            marginBottom: 20,
+          }}
+        >
           <Title
             text={"Cargas"}
-            font="h5"
+            font={sm ? "h5" : "h4"}
             align="center"
             color={colors.white1}
           />
           <Title
             text={charges ? `$${charges}` : 0}
-            font="h3"
+            font={sm ? "h4" : "h3"}
             weight={600}
             color={colors.white1}
             align="center"
@@ -56,16 +79,23 @@ const Display = () => {
           />
         </div>
 
-        <div className="paper3">
+        <div
+          className="paper3"
+          style={{
+            width: sm ? "100%" : "45%",
+            borderRadius: 20,
+            marginBottom: 20,
+          }}
+        >
           <Title
             text={"Gastos"}
-            font="h5"
+            font={sm ? "h5" : "h4"}
             align="center"
             color={colors.white1}
           />
           <Title
             text={expenses ? `$${expenses}` : 0}
-            font="h3"
+            font={sm ? "h4" : "h3"}
             weight={600}
             color={colors.white1}
             align="center"
