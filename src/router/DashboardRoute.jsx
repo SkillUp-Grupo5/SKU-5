@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import { LayoutPage } from '../application/utils/LayoutPage'
 import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+import { Loader } from '../application/utils/Loader'
 
 
 const Home = lazy(() => import('../application/home/pages/Home'))
@@ -20,9 +21,7 @@ export const DashboardRoute = () => {
 					element={
 						<React.Suspense
 							fallback={
-								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-									<CircularProgress />
-								</Box>
+								<Loader />
 							}
 						>
 							<Home />
@@ -34,9 +33,7 @@ export const DashboardRoute = () => {
 					element={
 						<React.Suspense
 							fallback={
-								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-									<CircularProgress />
-								</Box>
+								<Loader />
 							}
 						>
 							<Balance />
@@ -48,9 +45,7 @@ export const DashboardRoute = () => {
 					element={
 						<React.Suspense
 							fallback={
-								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-									<CircularProgress />
-								</Box>
+								<Loader />
 							}
 						>
 							<Movements />
@@ -63,9 +58,7 @@ export const DashboardRoute = () => {
 					element={
 						<React.Suspense
 							fallback={
-								<Box sx={{ display: 'flex', justifyContent: 'center' }}>
-									<CircularProgress />
-								</Box>
+								<Loader />
 							}
 						>
 							<UsersPage />

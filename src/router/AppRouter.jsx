@@ -28,17 +28,9 @@ export const AppRouter = () => {
 	}, []);
 
 	/**
-	 * While the checking process is carried out, we return a loading.
+	 * While the checking process is carried out, we don't return nothing.
 	 */
-	if (checking) {
-
-        return <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={true}
-        >
-            <CircularProgress color="inherit" size='80px' sx={{ display: 'block' }} />
-        </Backdrop>
-    }
+	if (checking) return;
 
 	return (
 		<>

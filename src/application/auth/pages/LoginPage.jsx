@@ -66,6 +66,7 @@ export const LoginPage = () => {
         <Box
           width="100%"
           maxHeight="30vh"
+          minHeight="30vh"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -86,17 +87,18 @@ export const LoginPage = () => {
         </Box>
         <Box
           component="form"
-          sx={{ mt: 3, width: "50%" }}
+          sx={{ mt: 3, width: "60%" }}
           onSubmit={formik.handleSubmit}
         >
           <Grid
             container
             display="flex"
+            flexDirection='column'
             alignItems="center"
             justifyContent="center"
             spacing={2}
           >
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 // required
                 fullWidth
@@ -110,7 +112,7 @@ export const LoginPage = () => {
                 helperText={formik.touched.email && formik.errors.email}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 // required
                 fullWidth
@@ -127,7 +129,7 @@ export const LoginPage = () => {
                 helperText={formik.touched.password && formik.errors.password}
               />
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={12} sm={6}>
               <Button
                 type="submit"
                 fullWidth
