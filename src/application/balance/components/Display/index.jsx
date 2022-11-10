@@ -3,14 +3,12 @@ import { colors } from "../../../../utils/colors";
 import Paper from "@mui/material/Paper";
 import Title from "../../../utils/Title";
 import { useBalanceStore } from "../../../../hooks/useBalanceStore";
-import "./Display.css";
 import { useMediaQuery, useTheme } from "@mui/material";
 const Display = () => {
   const { total, expenses, charges } = useBalanceStore();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
-  const xl = useMediaQuery(theme.breakpoints.down("xl"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
   return (
     <div
@@ -28,18 +26,18 @@ const Display = () => {
           borderRadius: 20,
           marginTop: 10,
           marginBottom: 40,
+          background: "linear-gradient(10deg, #1976d28d, #1976d2, #1976d2)",
         }}
-        className="paper1"
       >
         <Title
           text={"Total disponible"}
-          font={sm ? "h6" : "h4"}
+          font={sm ? "h6" : md ? "h6" : "h5"}
           align="center"
           color={colors.white}
         />
         <Title
           text={total ? `$${total}.00` : 0.0}
-          font={sm ? "h3" : "h2"}
+          font={sm ? "h6" : md ? "h4" : lg ? "h3" : "h2"}
           weight={600}
           color={colors.white1}
           align="center"
@@ -56,22 +54,23 @@ const Display = () => {
         }}
       >
         <div
-          className="paper2"
           style={{
             width: sm ? "100%" : "45%",
             borderRadius: 20,
             marginBottom: 20,
+            background: "linear-gradient(10deg, #4efb8b, #12cc34, #03ba43)",
+            boxShadow: "1px 3px 4px rgba(0, 0, 0, 0.389)",
           }}
         >
           <Title
             text={"Cargas"}
-            font={sm ? "h5" : "h4"}
+            font={sm ? "h6" : md ? "h6" : "h5"}
             align="center"
             color={colors.white1}
           />
           <Title
             text={charges ? `$${charges}` : 0}
-            font={sm ? "h4" : "h3"}
+            font={sm ? "h6" : md ? "h6" : "h4"}
             weight={600}
             color={colors.white1}
             align="center"
@@ -80,22 +79,23 @@ const Display = () => {
         </div>
 
         <div
-          className="paper3"
           style={{
             width: sm ? "100%" : "45%",
             borderRadius: 20,
             marginBottom: 20,
+            background: "linear-gradient(10deg, #fb4e4e, #cc1212, #ba0303)",
+            boxShadow: "1px 3px 4px rgba(0, 0, 0, 0.389)",
           }}
         >
           <Title
             text={"Gastos"}
-            font={sm ? "h5" : "h4"}
+            font={sm ? "h6" : md ? "h6" : "h5"}
             align="center"
             color={colors.white1}
           />
           <Title
             text={expenses ? `$${expenses}` : 0}
-            font={sm ? "h4" : "h3"}
+            font={sm ? "h6" : md ? "h6" : "h4"}
             weight={600}
             color={colors.white1}
             align="center"
