@@ -13,7 +13,6 @@ import {
   Typography,
 } from '@mui/material';
 import { Link as LinkRouter } from 'react-router-dom';
-import Buttom from '../../utils/Buttom';
 
 export const TableHome = ({ transactions }) => {
   return (
