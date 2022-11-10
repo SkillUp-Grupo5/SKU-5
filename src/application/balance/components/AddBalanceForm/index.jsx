@@ -5,16 +5,16 @@ import Title from "../../../utils/Title";
 import Modal from "@mui/material/Modal";
 import { colors } from "../../../../utils/colors";
 import { validation } from "../../validations";
-import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 import { useMediaQuery, useTheme } from "@mui/material";
 import style from "./style";
 import TextFieldForm from "../TextFieldForm";
 import SelectCurrency from "../SelectCurrency";
+import { useOperationsStore } from "../../../../hooks";
 
 const AddBalanceForm = (props) => {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
-  const { addNewCharge, total } = useBalanceStore();
+  const { StartAddNewCharge, balance } = useOperationsStore();
   const { open, setOpen, type } = props;
 
   const handleClose = () => {
@@ -36,7 +36,7 @@ const AddBalanceForm = (props) => {
   });
 
   React.useEffect(() => {
-    if (total > 0) {
+    if (balance.total > 0) {
       validation({ ...form }, settoSend);
     }
   }, [form]);
@@ -60,7 +60,7 @@ const AddBalanceForm = (props) => {
             text={
               type === "topup"
                 ? "Aqui puedes cargar dinero en tu cuenta"
-                : total > 0
+                : balance.total > 0
                 ? "Aqui puedes añadir un gasto de tu salario"
                 : "Su saldo es 0, no puede añadir gastos"
             }
@@ -97,7 +97,7 @@ const AddBalanceForm = (props) => {
                 });
 
                 handleClose();
-                addNewCharge({
+                StartAddNewCharge({
                   amount: form.amount,
                   type: type,
                   concept: form.concept,
