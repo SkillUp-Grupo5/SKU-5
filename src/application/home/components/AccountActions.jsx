@@ -28,7 +28,7 @@ export const AccountActions = ({ balance }) => {
               Ingresar Dinero
             </Button>
           </Link>
-          <Link as={LinkRouter} to="/transactions" underline="none">
+          <Link as={LinkRouter} to="/users" underline="none">
             <Button variant="contained" sx={{ fontSize: { xs: 12, md: 14 } }}>
               Enviar Dinero
             </Button>

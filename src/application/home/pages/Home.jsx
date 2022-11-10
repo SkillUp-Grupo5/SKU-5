@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/globals.css";
 import "../../../styles/application/home/pages/Home.css";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { AccountActions } from "../components/AccountActions";
 import { TableHome } from "../components/TableHome";
 import { useOperationsStore } from "../../../hooks";
+
 const Home = () => {
   const { transactions, balance } = useOperationsStore();
 
-  if (!transactions.data || !balance.total) return;
+  // if (!transactions.data || !balance.total) return;
 
   return (
     <div className="App">
@@ -25,8 +26,23 @@ const Home = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          <AccountActions balance={balance.total} />
-          <TableHome transactions={transactions.data.slice(0, 5)} />
+          {transactions.data && balance.total ? (
+            <>
+              <AccountActions balance={balance.total} />
+              <TableHome transactions={transactions.data.slice(0, 5)} />
+            </>
+          ) : (
+            <>
+              <Skeleton
+                variant="rectangular"
+                sx={{ height: { xs: "150px", md: "105px" }, display: "flex" }}
+              />
+              <Skeleton
+                variant="rectangular"
+                sx={{ minHeight: "300px", marginTop: "4rem" }}
+              />
+            </>
+          )}
         </Box>
       </Box>
     </div>
