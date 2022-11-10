@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/globals.css';
 import '../../../styles/application/home/pages/Home.css';
-import { Box } from '@mui/material';
+import { Box, Skeleton } from '@mui/material';
 import { AccountActions } from '../components/AccountActions';
 import { TableHome } from '../components/TableHome';
 import { axiosClientToken } from '../../../helpers/axiosHelper';
@@ -52,11 +52,24 @@ const Home = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          <AccountActions balance={balance} />
-          <TableHome transactions={transactions} />
+          {balance ? (
+            <>
+              <AccountActions balance={balance} />
+              <TableHome transactions={transactions} />
+            </>
+          ) : (
+            <>
+              <Skeleton
+                variant="rectangular"
+                sx={{ height: { xs: '150px', md: '105px' }, display: 'flex' }}
+              />
+              <Skeleton
+                variant="rectangular"
+                sx={{ minHeight: '300px', marginTop: '4rem' }}
+              />
+            </>
+          )}
         </Box>
-
-        {/* <UsersTable /> */}
       </Box>
     </div>
   );
