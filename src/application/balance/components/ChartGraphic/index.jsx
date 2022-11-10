@@ -1,11 +1,11 @@
 import { Paper, useMediaQuery, useTheme } from "@mui/material";
 import React from "react";
 import Chart from "react-apexcharts";
-import { useBalanceStore } from "../../../../hooks/useBalanceStore";
+import { useOperationsStore } from "../../../../hooks";
 import Title from "../../../utils/Title";
 
 export const ChartGraphic = () => {
-  const { charges, expenses } = useBalanceStore();
+  const { balance } = useOperationsStore();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
@@ -40,7 +40,7 @@ export const ChartGraphic = () => {
         type="pie"
         width={sm ? "110%" : xl ? "120%" : "100%"}
         height={"100%"}
-        series={[expenses, charges]}
+        series={[balance.expenses, balance.charges]}
         options={{
           colors: ["#c80f0f", "#0fc837"],
           labels: ["gastos", "cargas"],

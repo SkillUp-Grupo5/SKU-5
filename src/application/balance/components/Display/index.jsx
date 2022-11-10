@@ -2,10 +2,10 @@ import React from "react";
 import { colors } from "../../../../utils/colors";
 import Paper from "@mui/material/Paper";
 import Title from "../../../utils/Title";
-import { useBalanceStore } from "../../../../hooks/useBalanceStore";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { useOperationsStore } from "../../../../hooks";
 const Display = () => {
-  const { total, expenses, charges } = useBalanceStore();
+  const { balance } = useOperationsStore();
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
@@ -36,7 +36,7 @@ const Display = () => {
           color={colors.white}
         />
         <Title
-          text={total ? `$${total}.00` : 0.0}
+          text={balance.total ? `$${balance.total}.00` : 0.0}
           font={sm ? "h6" : md ? "h4" : lg ? "h3" : "h2"}
           weight={600}
           color={colors.white1}
@@ -69,7 +69,7 @@ const Display = () => {
             color={colors.white1}
           />
           <Title
-            text={charges ? `$${charges}` : 0}
+            text={balance.charges ? `$${balance.charges}` : 0}
             font={sm ? "h6" : md ? "h6" : "h4"}
             weight={600}
             color={colors.white1}
@@ -94,7 +94,7 @@ const Display = () => {
             color={colors.white1}
           />
           <Title
-            text={expenses ? `$${expenses}` : 0}
+            text={balance.expenses ? `$${balance.expenses}` : 0}
             font={sm ? "h6" : md ? "h6" : "h4"}
             weight={600}
             color={colors.white1}

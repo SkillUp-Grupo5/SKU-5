@@ -1,35 +1,43 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export const operationsSlice = createSlice({
-  name: 'operations',
+  name: "operations",
   initialState: {
-    // checking: true,
-    // uid: null,
-    // name: null,
+    users: null,
+    transactions: null,
+    balance: {
+      charges: null,
+      expenses: null,
+      total: null,
+    },
   },
   reducers: {
-    // authLogin: (state, action) => {
-
-    //   state.checking = false;
-    //   state.uid = action.payload.uid;
-    //   state.name = action.payload.name;
-    // },
-    // authCheckingFinish: (state) => {
-
-    //   state.checking = false;
-    // },
-    // authLogout: (state) => {
-
-    //   state.uid = null;
-    //   state.name = null;
-    //   state.checking = false;
-    // },
-
+    loadUsers: (state, action) => {
+      state.users = {
+        data: action.payload.data,
+        nextPage: action.payload.nextPage,
+        previousPage: action.payload.previousPage,
+      };
+    },
+    loadTransactions: (state, action) => {
+      state.transactions = action.payload;
+    },
+    addCharges: (state, action) => {
+      state.balance.charges = action.payload;
+    },
+    addExpenses: (state, action) => {
+      state.balance.expenses = action.payload;
+    },
+    addTotal: (state, action) => {
+      state.balance.total = action.payload;
+    },
   },
-})
+});
 
 export const {
-  // authLogin,
-  // authCheckingFinish,
-  // authLogout 
+  loadUsers,
+  loadTransactions,
+  addCharges,
+  addExpenses,
+  addTotal
 } = operationsSlice.actions;

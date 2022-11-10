@@ -2,19 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 
-import { axiosClient, axiosClientToken } from "../helpers";
+import walletApi from "../api/walletApi";
 
 import {
   authCheckingFinish,
   authLogin,
   authLogout,
 } from "../store/slices/authSlice";
+import { useOperationsStore } from "./useOperationsStore";
 
 /**
  * On this useHook you can put http requests and once you get
  * data you want then you can put that data on the store of the app.
  */
 export const useAuthStore = () => {
+  const { StartGetTransactions } = useOperationsStore();
+
   const dispatch = useDispatch();
   const { id, email, first_name, last_name, roleId, points, checking } =
     useSelector((state) => state.auth);
@@ -30,27 +33,16 @@ export const useAuthStore = () => {
        */
       const {
         data: { accessToken },
-      } = await axiosClient.post("/auth/login", data);
+      } = await walletApi.post("/auth/login", data);
 
       /**
        * Once we have the accesToken then we get the user data fron
        * the API.
        */
       if (accessToken) {
-        const newData = await axiosClientToken.get("/auth/me");
+        localStorage.setItem("token", accessToken);
 
-        /**
-         * Send the user data to the store
-         */
-        dispatch(authLogin(newData.data));
-
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          text: "Inicio de sesión exitoso!",
-          showConfirmButton: false,
-          timer: 2000,
-        });
+        StartChecking();
       }
     } catch (error) {
       console.log(error);
@@ -74,7 +66,7 @@ export const useAuthStore = () => {
      * First we create an account
      */
     try {
-      const newData = await axiosClient.post("/users", {
+      const newData = await walletApi.post("/users", {
         ...data,
         roleId: 2,
         points: 10000,
@@ -87,6 +79,9 @@ export const useAuthStore = () => {
        */
       if (newData.status === 201) {
         StartLogin(data);
+
+        // TODO: revisar esto.
+        dispatch(authLogin(newData.data));
       }
     } catch (error) {
       console.log(error);
@@ -115,18 +110,20 @@ export const useAuthStore = () => {
       /**
        * We get the data from the API.
        */
-      const newData = await axiosClientToken.get("/auth/me");
+      const newData = await walletApi.get("/auth/me");
 
       if (newData.status === 200) {
         /**
          * Send the user data to the store
          */
         dispatch(authLogin(newData.data));
+
+        StartGetTransactions();
       }
       dispatch(authCheckingFinish());
     } catch (error) {
       dispatch(authCheckingFinish());
-      console.log(error.response.data.msg);
+      console.log(error);
     }
   };
 

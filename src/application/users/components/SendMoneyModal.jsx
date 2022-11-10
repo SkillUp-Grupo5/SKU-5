@@ -15,9 +15,9 @@ import { useTheme } from "@mui/material/styles";
 
 import { useFormik } from "formik";
 
-import { startSendMoney } from "../../../api/users";
-
 import { YupSendMoneyValidations } from "../../../helpers";
+
+import { useOperationsStore } from "../../../hooks";
 
 const currencies = [
   {
@@ -43,6 +43,9 @@ const currencies = [
 ];
 
 export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
+
+  const { StartSendMoney } = useOperationsStore();
+
   const [currency, setCurrency] = useState("ARS");
 
   const formik = useFormik({
@@ -54,7 +57,7 @@ export const SendMoneyModal = ({ modalStatus, setModalStatus, activeUser }) => {
     validationSchema: YupSendMoneyValidations,
     onSubmit: (values, { resetForm }) => {
       try {
-        startSendMoney(
+        StartSendMoney(
           {
             type: "payment",
             concept: values.context,

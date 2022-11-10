@@ -4,32 +4,23 @@ import { colors } from "../../../utils/colors";
 import Title from "../../utils/Title";
 import ButtonsContain from "../components/ButtonsContain";
 import Display from "../components/Display";
-import { useBalanceStore } from "../../../hooks/useBalanceStore";
 import { useTheme } from "@mui/material/styles";
 import { ChartGraphic } from "../components/ChartGraphic";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import SkeletonBalance from "../components/SkeletonBalance";
 import { useState } from "react";
+import { useOperationsStore } from "../../../hooks";
 const Balance = () => {
+
+  const { balance } = useOperationsStore();
+
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const xl = useMediaQuery(theme.breakpoints.down("xl"));
-  const [loaded, setloaded] = useState();
-  const load = () => {
-    setTimeout(() => {
-      setloaded(!loaded);
-    }, 1300);
-  };
-  const { addNewTotal } = useBalanceStore();
-  useEffect(() => {
-    addNewTotal();
-    load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <>
-      {loaded ? (
+      {!!balance.total ? (
         <Container
           className={"graphic"}
           sx={{

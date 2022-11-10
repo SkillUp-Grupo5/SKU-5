@@ -24,7 +24,7 @@ import Paper from "@mui/material/Paper";
 
 import { SendMoneyModal } from "./SendMoneyModal";
 
-import { startGetUsers } from "../../../api/users";
+import { useOperationsStore } from "../../../hooks";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -47,31 +47,20 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const UsersTable = () => {
-  const [usersData, setUsersData] = useState({
-    users: [],
-    nextPage: null,
-    previousPage: null,
-  });
+  const { users, StartGetUsers } = useOperationsStore();
+
   const [page, setPage] = useState(1);
 
   const [modalStatus, setModalStatus] = useState(false);
   const [activeUser, setActiveUser] = useState(null);
 
-  const loadUsers = async (pagePath) => {
-    const data = await startGetUsers(pagePath);
-
-    setUsersData(data);
-  };
-
   useEffect(() => {
-    loadUsers(page);
+    StartGetUsers(page);
   }, [page]);
 
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
-  const xl = useMediaQuery(theme.breakpoints.down("xl"));
-  const lg = useMediaQuery(theme.breakpoints.down("lg"));
 
   const handleNextPage = (e) => {
     e.preventDefault();
@@ -105,14 +94,11 @@ export const UsersTable = () => {
           alignItems: "center",
           flexDirection: "column",
           overflowX: "cover",
-          marginBottom: '250px',
+          marginBottom: "250px",
           marginLeft: !sm && "7.5%",
         }}
       >
-        {
-        (usersData.users?.length !== 0 || !usersData.users) 
-        ? 
-        (
+        {users?.data.length !== 0 && users !== null ? (
           <Table
             sx={{
               width: sm ? "100%" : "80%",
@@ -130,7 +116,7 @@ export const UsersTable = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {usersData.users?.map((user) => (
+              {users?.data.map((user) => (
                 <TableRow
                   key={user.id}
                   sx={{
@@ -196,7 +182,7 @@ export const UsersTable = () => {
             <IconButton
               color="primary"
               component="span"
-              disabled={usersData.previousPage === null ? true : false}
+              disabled={users?.previousPage === null ? true : false}
               onClick={handlePreviusPage}
             >
               <ArrowLeftIcon />
@@ -209,7 +195,7 @@ export const UsersTable = () => {
             <IconButton
               color="primary"
               component="span"
-              disabled={usersData.nextPage === null ? true : false}
+              disabled={users?.nextPage === null ? true : false}
               onClick={handleNextPage}
             >
               <ArrowRightIcon />
