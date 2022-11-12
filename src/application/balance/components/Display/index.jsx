@@ -1,15 +1,26 @@
 import React from "react";
-import { colors } from "../../../../utils/colors";
-import Paper from "@mui/material/Paper";
-import Title from "../../../utils/Title";
 import { useMediaQuery, useTheme } from "@mui/material";
 import { useOperationsStore } from "../../../../hooks";
+import Paper from "@mui/material/Paper";
+import Title from "../../../utils/Title";
+import { colors } from "../../../../utils/colors";
+
+// This component is in charge of displaying the value of the loads according to their type,
+// apart from the balance sheet value
+
 const Display = () => {
+  // We extract the balance sheet status by means of this hook
+
   const { balance } = useOperationsStore();
+
+  // We use useTheme and useMediaQuery to create the breakpoints that will help us make our component responsive.
+  // that will be used to make our component responsive.
+
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
   const lg = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <div
       style={{

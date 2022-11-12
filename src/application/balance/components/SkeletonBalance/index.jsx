@@ -1,10 +1,17 @@
 import React from "react";
-import Skeleton from "@mui/material/Skeleton";
-import Stack from "@mui/material/Stack";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { useMediaQuery, useTheme, Skeleton, Stack } from "@mui/material";
+
+// This component is in charge of creating an animation of the screen loading its components.
+// loading its components
 
 const StackBalance = () => {
+  // We use the dimensions provided by windows for our screen in question
+  // to be able to adapt certain values
   const { innerHeight: heigth, innerWidth: width } = window;
+
+  // We use useTheme and useMediaQuery to create the breakpoints that will help us make our component responsive.
+  // that will be used to make our component responsive.
+
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
@@ -71,11 +78,11 @@ const StackBalance = () => {
 };
 
 const StackGraphic = () => {
-  const { innerHeight: height, innerWidth: width } = window;
+  const { innerWidth: width } = window;
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
-  const lg = useMediaQuery(theme.breakpoints.down("lg"));
+
   return (
     <Stack sx={{ width: sm ? width * 0.8 : width * 0.4 }}>
       <Skeleton

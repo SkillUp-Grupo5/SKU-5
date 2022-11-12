@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
-import { Paper, Container } from "@mui/material";
-import { colors } from "../../../utils/colors";
+import React from "react";
+import { useOperationsStore } from "../../../hooks";
+import { useMediaQuery, useTheme, Paper, Container } from "@mui/material";
 import Title from "../../utils/Title";
 import ButtonsContain from "../components/ButtonsContain";
 import Display from "../components/Display";
-import { useTheme } from "@mui/material/styles";
 import { ChartGraphic } from "../components/ChartGraphic";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import SkeletonBalance from "../components/SkeletonBalance";
-import { useState } from "react";
-import { useOperationsStore } from "../../../hooks";
+import { colors } from "../../../utils/colors";
+
+// This component shows the complete view of the balance sheet with all its subcomponents in which the status of the loads is reflected.
+// subcomponents in which the status of loads is reflected,
+// balance sheet and graph of the balance sheet
+
 const Balance = () => {
+  // We extract the balance sheet status by means of this hook
 
   const { balance } = useOperationsStore();
+
+  // We use useTheme and useMediaQuery to be able to create the breackpoints
+  // that will be used to make our component responsive.
 
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
@@ -53,7 +59,7 @@ const Balance = () => {
             <Title
               text="Mi saldo"
               font="h4"
-              align="start"
+              align="left"
               weight={600}
               color={colors.grey2}
             />
