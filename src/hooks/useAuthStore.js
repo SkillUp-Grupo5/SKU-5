@@ -84,6 +84,9 @@ export const useAuthStore = () => {
        */
       if (newData.status === 201) {
         StartLogin(data);
+
+        // TODO: revisar esto.
+        dispatch(authLogin(newData.data));
       }
     } catch (error) {
       console.log(error);

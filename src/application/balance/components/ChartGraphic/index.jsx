@@ -1,5 +1,6 @@
 /** Libraries */
 import React from "react";
+
 import Chart from "react-apexcharts";
 
 import { Paper, useMediaQuery, useTheme } from "@mui/material";
@@ -10,8 +11,17 @@ import { useOperationsStore } from "../../../../hooks";
 /** Utils */
 import Title from "../../../utils/Title";
 
+// This component is used to display the graph, which, using the data of the balance sheet's loads and discharges
+// balance sheet loading and unloading data, it makes a representation of the
+
 export const ChartGraphic = () => {
+  // We extract the balance sheet status by means of this hook
+
   const { balance } = useOperationsStore();
+
+  // We use useTheme and useMediaQuery to create the breakpoints that will help us make our component responsive.
+  // that will be used to make our component responsive.
+
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));

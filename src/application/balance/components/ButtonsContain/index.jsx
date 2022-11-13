@@ -9,8 +9,14 @@ import AddBalanceForm from "../AddBalanceForm";
 import { colors } from "../../../../utils/colors";
 
 const ButtonsContain = () => {
+  // We create the state that allows us to visualize the modal used to load the transfers
+
   const [openCharge, setopenCharge] = React.useState(false);
+
+  // By means of this status we define the type of loading to be performed
+
   const [typeForm, settypeForm] = React.useState();
+
   return (
     <>
       <AddBalanceForm

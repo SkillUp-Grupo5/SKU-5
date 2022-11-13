@@ -3,6 +3,8 @@ import { useMediaQuery, useTheme } from "@mui/material";
 const useStyle = () => {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
+  const md = useMediaQuery(theme.breakpoints.down("md"));
+  const lg = useMediaQuery(theme.breakpoints.down("lg"));
   const style = {
     position: "absolute",
     top: "50%",
@@ -11,8 +13,8 @@ const useStyle = () => {
     justifyContent: "space-around",
     flexDirection: "column",
     transform: "translate(-50%, -50%)",
-    width: sm ? "70%" : "55%",
-    height: "58%",
+    width: sm ? "70%" : md || lg ? "75%" : "65%",
+    height: md ? "63%" : "58%",
     bgcolor: "background.paper",
     borderRadius: 10,
     background:
