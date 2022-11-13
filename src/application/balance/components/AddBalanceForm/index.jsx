@@ -1,15 +1,28 @@
+/** Libraries */
 import * as React from "react";
+
 import PropTypes from "prop-types";
-import { useOperationsStore } from "../../../../hooks";
+
 import { useMediaQuery, useTheme } from "@mui/material";
-import { validation } from "../../validations";
 import { Box, Modal } from "@mui/material";
-import Button from "../../../utils/Buttom";
-import Title from "../../../utils/Title";
-import TextFieldForm from "../TextFieldForm";
+
+/** Components */
 import SelectCurrency from "../SelectCurrency";
-import style from "./style";
+import TextFieldForm from "../TextFieldForm";
+import Title from "../../../utils/Title";
+import Button from "../../../utils/Buttom";
+
+/** Custom hooks */
+import { useOperationsStore } from "../../../../hooks";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
+
+/** Validations */
+import { validation } from "../../validations";
+
+/** Styles */
+import style from "./style";
 
 // This component is in charge of rendering a modal that incorporates the form
 // necessary to be able to carry out the loads
@@ -74,7 +87,7 @@ const AddBalanceForm = ({ open, setOpen, type }) => {
     if (balance.total > 0) {
       validation({ ...form }, settoSend);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
   }, [form]);
 
   return (

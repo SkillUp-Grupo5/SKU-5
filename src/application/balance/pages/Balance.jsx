@@ -1,11 +1,18 @@
+/** Libraries */
 import React from "react";
-import { useOperationsStore } from "../../../hooks";
 import { useMediaQuery, useTheme, Paper, Container } from "@mui/material";
+
+/** Components */
 import Title from "../../utils/Title";
 import ButtonsContain from "../components/ButtonsContain";
 import Display from "../components/Display";
 import { ChartGraphic } from "../components/ChartGraphic";
 import SkeletonBalance from "../components/SkeletonBalance";
+
+/** Custom hooks */
+import { useOperationsStore } from "../../../hooks";
+
+/** Utils */
 import { colors } from "../../../utils/colors";
 
 // This component shows the complete view of the balance sheet with all its subcomponents in which the status of the loads is reflected.

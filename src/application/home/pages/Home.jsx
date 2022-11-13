@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from "react";
-import "../../../styles/globals.css";
-import "../../../styles/application/home/pages/Home.css";
+/** Libraries */
+import React from "react";
 import { Box, Skeleton } from "@mui/material";
+
+/** Components */
 import { AccountActions } from "../components/AccountActions";
 import { TableHome } from "../components/TableHome";
+
+/** Custom hooks */
 import { useOperationsStore } from "../../../hooks";
+
+/** Styles */
+import "../../../styles/globals.css";
+import "../../../styles/application/home/pages/Home.css";
 
 const Home = () => {
   const { transactions, balance } = useOperationsStore();
-
-  // if (!transactions.data || !balance.total) return;
 
   return (
     <div className="App">

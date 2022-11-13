@@ -1,7 +1,9 @@
-import { Button, Card, Link, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+/** Libraries */
 import React from 'react';
 import { Link as LinkRouter } from 'react-router-dom';
+
+import { Button, Card, Link, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 
 export const AccountActions = ({ balance }) => {
   return (

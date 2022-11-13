@@ -1,9 +1,8 @@
+/** Libraries */
 import React, { useState } from "react";
 
 import {
   Button,
-  Container,
-  Grid,
   MenuItem,
   Modal,
   TextField,
@@ -15,9 +14,11 @@ import { useTheme } from "@mui/material/styles";
 
 import { useFormik } from "formik";
 
-import { YupSendMoneyValidations } from "../../../helpers";
-
+/** Custom hooks */
 import { useOperationsStore } from "../../../hooks";
+
+/** Helpers */
+import { YupSendMoneyValidations } from "../../../helpers";
 
 const currencies = [
   {

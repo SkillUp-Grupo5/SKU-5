@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+/** Libraries */
 import React from "react";
 
+/** Components */
 import { UsersTable } from "../components/UsersTable";
 
 const UsersPage = () => {

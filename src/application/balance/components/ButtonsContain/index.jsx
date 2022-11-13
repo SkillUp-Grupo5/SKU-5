@@ -1,6 +1,11 @@
+/** Libraries */
 import React from "react";
-import AddBalanceForm from "../AddBalanceForm";
+
+/** Components */
 import Button from "../../../utils/Buttom";
+import AddBalanceForm from "../AddBalanceForm";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
 
 const ButtonsContain = () => {

@@ -1,8 +1,16 @@
+/** Libraries */
 import React from "react";
-import { useMediaQuery, useTheme } from "@mui/material";
-import { useOperationsStore } from "../../../../hooks";
+
 import Paper from "@mui/material/Paper";
+import { useMediaQuery, useTheme } from "@mui/material";
+
+/** Components */
 import Title from "../../../utils/Title";
+
+/** Custom hooks */
+import { useOperationsStore } from "../../../../hooks";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
 
 // This component is in charge of displaying the value of the loads according to their type,

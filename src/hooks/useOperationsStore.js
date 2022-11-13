@@ -1,9 +1,14 @@
+/** Libraries */
 import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 
 import { useMediaQuery, useTheme } from "@mui/material";
 
+/** Api */
+import walletApi from "../api/walletApi";
+
+/** Slices - Store */
 import {
   loadTransactions,
   loadUsers,
@@ -12,7 +17,7 @@ import {
   addTotal,
 } from "../store/slices/operationsSlice";
 
-import walletApi from "../api/walletApi";
+/** Utils */
 import { colors } from "../utils/colors";
 
 /**
@@ -48,8 +53,6 @@ export const useOperationsStore = () => {
        */
       const { data, status } = await walletApi.get("/transactions");
 
-      console.log(data);
-
       /**
        * If the response return a status 200, then we put the data
        * into the store.
@@ -58,20 +61,14 @@ export const useOperationsStore = () => {
         const res = data.data.map((e) => ({ amount: e.amount, type: e.type }));
 
         /**
-         * FIXME: When the charges and expenses pass by "reduce"
-         * the result of that operation is not correct.
-         * But maybe that's because the pagination.
-         */
-
-        /**
          * We filter and calculate charges, expenses and total.
          */
         const charges = res
-          .filter((e) => e.type == "topup")
+          .filter((e) => e.type === "topup")
           .map((e) => Number(e.amount))
           .reduce((a, b) => a + b, 0);
         const expenses = res
-          .filter((e) => e.type == "payment")
+          .filter((e) => e.type === "payment")
           .map((e) => Number(e.amount))
           .reduce((a, b) => a + b, 0);
 
@@ -164,7 +161,7 @@ export const useOperationsStore = () => {
           color: colors.white1,
           width: sm ? "80%" : "50%",
           text: `Carga de ${
-            type == "topup" ? "saldo" : "gasto"
+            type === "topup" ? "saldo" : "gasto"
           } realizada con exito!`,
           showConfirmButton: false,
           timer: 2000,
@@ -181,7 +178,7 @@ export const useOperationsStore = () => {
         iconColor: colors.white1,
         color: colors.white1,
         text: `No sde pudo realizar la carga de ${
-          type == "topup" ? "saldo" : "gasto"
+          type === "topup" ? "saldo" : "gasto"
         }`,
         showConfirmButton: false,
         timer: 2000,
@@ -191,7 +188,6 @@ export const useOperationsStore = () => {
 
   /**
    * With this funcion we delete a deposit
-   * TODO: Check this function, see if it's necessary.
    */
   const StartDeleteDeposit = async () => {
     try {
@@ -213,8 +209,6 @@ export const useOperationsStore = () => {
        * First we make the request to the API.
        */
       const { data, status } = await walletApi.get(`/users/?page=${page}`);
-
-      console.log(data);
 
       /**
        * If the response return a status 200 then we proceed to put the data

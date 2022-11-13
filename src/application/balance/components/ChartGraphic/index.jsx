@@ -1,7 +1,14 @@
+/** Libraries */
 import React from "react";
-import { useOperationsStore } from "../../../../hooks";
-import { Paper, useMediaQuery, useTheme } from "@mui/material";
+
 import Chart from "react-apexcharts";
+
+import { Paper, useMediaQuery, useTheme } from "@mui/material";
+
+/** Custom hooks */
+import { useOperationsStore } from "../../../../hooks";
+
+/** Utils */
 import Title from "../../../utils/Title";
 
 // This component is used to display the graph, which, using the data of the balance sheet's loads and discharges

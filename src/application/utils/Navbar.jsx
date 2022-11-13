@@ -1,3 +1,5 @@
+/** Libraries */
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { styled, useTheme } from '@mui/material/styles'
@@ -23,8 +25,9 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet'
 import SwapVertIcon from '@mui/icons-material/SwapVert'
 import GroupIcon from '@mui/icons-material/Group'
 
-import { useState } from 'react'
 import { Button } from '@mui/material'
+
+/** Custom hooks */
 import { useAuthStore } from '../../hooks'
 
 const drawerWidth = 240

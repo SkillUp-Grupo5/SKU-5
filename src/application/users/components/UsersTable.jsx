@@ -1,6 +1,7 @@
+/** Libraries */
 import React, { useEffect, useState } from "react";
 
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
@@ -17,13 +18,13 @@ import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TableRow, { tableRowClasses } from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import TableRow from "@mui/material/TableRow";
 
+/** Components */
 import { SendMoneyModal } from "./SendMoneyModal";
 
+/** Custom hooks */
 import { useOperationsStore } from "../../../hooks";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,16 +34,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 14,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
   },
 }));
 
@@ -56,6 +47,7 @@ export const UsersTable = () => {
 
   useEffect(() => {
     StartGetUsers(page);
+    // eslint-disable-next-line
   }, [page]);
 
   const theme = useTheme();

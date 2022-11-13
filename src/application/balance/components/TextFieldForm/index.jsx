@@ -1,8 +1,15 @@
+/** Libraries */
 import React, { useEffect } from "react";
+
 import PropTypes from "prop-types";
+
 import { TextField, useMediaQuery, useTheme } from "@mui/material";
-import { validationAmount, validationConcept } from "../../validations";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
+
+/** Validations */
+import { validationAmount, validationConcept } from "../../validations";
 
 const TextFieldForm = ({ label, form, setForm }) => {
   // We use useTheme and useMediaQuery to create the breakpoints that will help us make our component responsive.

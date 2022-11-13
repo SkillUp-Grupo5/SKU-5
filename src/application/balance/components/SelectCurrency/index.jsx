@@ -1,6 +1,11 @@
+/** Libraries */
 import React, { useState } from "react";
+
 import PropTypes from "prop-types";
+
 import { MenuItem, TextField, useMediaQuery, useTheme } from "@mui/material";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
 
 // It is the component in charge of the function of selecting the type of currency within the

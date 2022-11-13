@@ -1,3 +1,4 @@
+/** Libraries */
 import * as Yup from 'yup';
 
 export const YupRegisterValidations = Yup.object({

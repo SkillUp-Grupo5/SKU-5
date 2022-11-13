@@ -1,3 +1,4 @@
+/** Libraries */
 import React from "react";
 import { useMediaQuery, useTheme, Skeleton, Stack } from "@mui/material";
 
@@ -82,7 +83,6 @@ const StackGraphic = () => {
   const theme = useTheme();
   const sm = useMediaQuery(theme.breakpoints.down("sm"));
   const md = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
     <Stack sx={{ width: sm ? width * 0.8 : width * 0.4 }}>
       <Skeleton
