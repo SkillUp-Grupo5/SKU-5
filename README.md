@@ -1,3 +1,11 @@
+
+  <p align="center">
+   <img src="https://img.shields.io/badge/Status-En%20Desarrollo-green">
+   <img src="https://img.shields.io/badge/Version%20-1.0.0-darkviolet">
+      <img src="https://img.shields.io/badge/Equipo - R 5-blue">
+           <img src="https://img.shields.io/badge/Empresa - Alkemy -darkcyan">
+   </p>
+
 <h1 align='center'> AlkyBank </h1>
 
 ![portada_readme_AlkyBank](https://user-images.githubusercontent.com/93409437/201484565-a50c1e1d-a871-4abe-897d-2c89a21bcc4c.png)
