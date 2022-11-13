@@ -10,8 +10,8 @@ import { TableHome } from '../components/TableHome';
 import { useOperationsStore } from '../../../hooks';
 
 /** Styles */
-import '../../../styles/globals.css';
-import '../../../styles/application/home/pages/Home.css';
+import './globals.css';
+import './Home.css';
 
 const Home = () => {
   const { transactions, balance } = useOperationsStore();

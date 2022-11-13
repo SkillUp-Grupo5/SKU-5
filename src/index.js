@@ -10,7 +10,7 @@ import { AppRouter } from './router/AppRouter'
 import { store } from './store'
 
 /** Styles */
-import './styles/index.css'
+import './index.css'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
