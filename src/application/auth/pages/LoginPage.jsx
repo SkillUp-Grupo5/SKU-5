@@ -14,7 +14,6 @@ import { useAuthStore } from '../../../hooks';
 /** Helpers */
 import { YupLoginValidations } from '../../../helpers';
 
-
 export const LoginPage = () => {
   const { StartLogin } = useAuthStore();
 
@@ -88,7 +87,7 @@ export const LoginPage = () => {
 
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo Electrónico"
                 name="email"
                 autoComplete="email"
                 value={formik.values.email}
@@ -102,7 +101,7 @@ export const LoginPage = () => {
                 // required
                 fullWidth
                 name="password"
-                label="password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="password"
@@ -128,7 +127,7 @@ export const LoginPage = () => {
                   },
                 }}
               >
-                Sign In
+                Ingresar
               </Button>
             </Grid>
           </Grid>

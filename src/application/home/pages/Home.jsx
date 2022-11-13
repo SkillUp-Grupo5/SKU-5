@@ -31,7 +31,7 @@ const Home = () => {
           flexDirection="column"
           justifyContent="center"
         >
-          {balance ? (
+          {balance.total ? (
             <>
               <AccountActions balance={balance.total} />
               <TableHome transactions={transactions.data.slice(0, 5)} />

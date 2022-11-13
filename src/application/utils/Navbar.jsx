@@ -169,7 +169,7 @@ export const Navbar = ({ children }) => {
 							}}
 							onClick={handleLogOut}
 						>
-							Log out
+							Salir
 						</Button>
 					</Typography>
 				</Toolbar>

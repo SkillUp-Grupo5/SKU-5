@@ -85,7 +85,7 @@ export const RegisterPage = () => {
                 required
                 fullWidth
                 id="firstName"
-                label="First Name"
+                label="Nombre"
                 autoFocus
                 value={formik.values.firstName}
                 onChange={formik.handleChange}
@@ -100,7 +100,7 @@ export const RegisterPage = () => {
                 required
                 fullWidth
                 id="lastName"
-                label="Last Name"
+                label="Apellido"
                 name="lastName"
                 autoComplete="family-name"
                 value={formik.values.lastName}
@@ -116,7 +116,7 @@ export const RegisterPage = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo Electrónico"
                 name="email"
                 autoComplete="email"
                 value={formik.values.email}
@@ -130,7 +130,7 @@ export const RegisterPage = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="new-password"
@@ -156,7 +156,7 @@ export const RegisterPage = () => {
               },
             }}
           >
-            Sign Up
+            Registrarse
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
