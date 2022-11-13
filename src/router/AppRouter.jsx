@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react'
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+/** Libraries */
+import { useEffect } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress'
-import { useAuthStore } from '../hooks'
+/** Routes Middlewares */
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
-import { LoginPage, RegisterPage } from '../application/auth/pages'
-import { DashboardRoute } from './DashboardRoute'
+/** Components */
+import { LoginPage, RegisterPage } from '../application/auth/pages';
 
-import { PrivateRoute } from './PrivateRoute'
-import { PublicRoute } from './PublicRoute'
+/** Custom hooks */
+import { useAuthStore } from '../hooks';
+
+/** Routes */
+import { DashboardRoute } from './DashboardRoute';
 
 /**
  * In this component we manage the routes of our application 
@@ -24,7 +28,8 @@ export const AppRouter = () => {
 	 * that token exist.
 	 */
 	useEffect(() => {
-		StartChecking()
+		StartChecking();
+		// eslint-disable-next-line
 	}, []);
 
 	/**

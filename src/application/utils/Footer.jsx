@@ -1,10 +1,19 @@
+/** Libraries */
 import React from "react";
-import { Box, Container, Link, Paper } from "@mui/material";
+
+import { Box, Link, Paper } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import "./utils.css";
+
+/** Components */
 import Title from "./Title";
+
+/** Utils */
 import { colors } from "../../utils/colors";
+
+/** Styles */
+import "./utils.css";
+
 const Footer = () => {
 
   const theme = useTheme();

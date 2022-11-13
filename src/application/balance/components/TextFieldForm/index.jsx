@@ -1,6 +1,12 @@
-import { TextField, useMediaQuery, useTheme } from "@mui/material";
+/** Libraries */
 import React, { useEffect } from "react";
+
+import { TextField, useMediaQuery, useTheme } from "@mui/material";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
+
+/** Validations */
 import { validationAmount, validationConcept } from "../../validations";
 
 const TextFieldForm = (props) => {

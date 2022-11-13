@@ -1,5 +1,9 @@
-import { MenuItem, TextField, useMediaQuery, useTheme } from "@mui/material";
+/** Libraries */
 import React, { useState } from "react";
+
+import { MenuItem, TextField, useMediaQuery, useTheme } from "@mui/material";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
 
 const SelectCurrency = (props) => {

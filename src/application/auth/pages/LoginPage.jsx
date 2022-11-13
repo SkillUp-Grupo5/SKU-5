@@ -1,12 +1,19 @@
+/** Libraries */
 import React from 'react';
 import { Link as LinkRouter } from 'react-router-dom';
 
 import { Box, Button, Grid, Link, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 
+/** Components */
 import Title from '../../utils/Title';
-import { YupLoginValidations } from '../../../helpers';
+
+/** Custom hooks */
 import { useAuthStore } from '../../../hooks';
+
+/** Helpers */
+import { YupLoginValidations } from '../../../helpers';
+
 
 export const LoginPage = () => {
   const { StartLogin } = useAuthStore();
@@ -139,10 +146,5 @@ export const LoginPage = () => {
         </Box>
       </Box>
     </Box>
-    // <form onSubmit={handleSubmit}>
-    // 	<input name="email" type="email" placeholder="email" onChange={(e) => handleOnchange(e)} value={form.email} />
-    // 	<input name="password" type="password" placeholder="password" onChange={(e) => handleOnchange(e)} value={form.password} />
-    // 	<button type="submit">Login</button>
-    // </form>
   );
 };

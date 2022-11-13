@@ -1,15 +1,26 @@
+/** Libraries */
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import { useMediaQuery, useTheme } from "@mui/material";
+
+/** Components */
 import Button from "../../../utils/Buttom";
 import Title from "../../../utils/Title";
-import Modal from "@mui/material/Modal";
-import { colors } from "../../../../utils/colors";
-import { validation } from "../../validations";
-import { useMediaQuery, useTheme } from "@mui/material";
-import style from "./style";
 import TextFieldForm from "../TextFieldForm";
 import SelectCurrency from "../SelectCurrency";
+
+/** Custom hooks  */
 import { useOperationsStore } from "../../../../hooks";
+
+/** Validations */
+import { validation } from "../../validations";
+
+/** Utils */
+import { colors } from "../../../../utils/colors";
+
+/** Styles */
+import style from "./style";
 
 const AddBalanceForm = (props) => {
   const theme = useTheme();
@@ -39,6 +50,7 @@ const AddBalanceForm = (props) => {
     if (balance.total > 0) {
       validation({ ...form }, settoSend);
     }
+    // eslint-disable-next-line
   }, [form]);
 
   return (

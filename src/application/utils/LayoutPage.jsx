@@ -1,9 +1,11 @@
+/** Libraries */
 import React from 'react'
 
 import { Box } from '@mui/system'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { useTheme } from '@mui/material/styles'
 
+/** Components */
 import Footer from './Footer'
 import { Navbar } from './Navbar'
 import { NavbarMovil } from './NavbarMovil'

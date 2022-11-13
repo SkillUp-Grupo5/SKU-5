@@ -1,3 +1,4 @@
+/** Libraries */
 import axios from 'axios';
 
 const walletApi = axios.create({
@@ -10,6 +11,7 @@ walletApi.interceptors.request.use( config => {
 
     config.headers = {
         ...config.headers,
+        // eslint-disable-next-line
         ['Authorization']: `Bearer ${localStorage.getItem('token')}`
     }
 

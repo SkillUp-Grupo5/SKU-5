@@ -1,14 +1,19 @@
+/** Libraries */
 import { useDispatch, useSelector } from "react-redux";
 
 import Swal from "sweetalert2";
 
+/** Api */
 import walletApi from "../api/walletApi";
 
+/** Slices - Store */
 import {
   authCheckingFinish,
   authLogin,
   authLogout,
 } from "../store/slices/authSlice";
+
+/** Custom hooks */
 import { useOperationsStore } from "./useOperationsStore";
 
 /**
@@ -79,9 +84,6 @@ export const useAuthStore = () => {
        */
       if (newData.status === 201) {
         StartLogin(data);
-
-        // TODO: revisar esto.
-        dispatch(authLogin(newData.data));
       }
     } catch (error) {
       console.log(error);

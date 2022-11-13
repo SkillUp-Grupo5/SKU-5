@@ -1,7 +1,13 @@
+/** Libraries */
 import React from "react";
+
+/** Components */
 import Button from "../../../utils/Buttom";
 import AddBalanceForm from "../AddBalanceForm";
+
+/** Utils */
 import { colors } from "../../../../utils/colors";
+
 const ButtonsContain = () => {
   const [openCharge, setopenCharge] = React.useState(false);
   const [typeForm, settypeForm] = React.useState();

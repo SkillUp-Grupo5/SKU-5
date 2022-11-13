@@ -1,7 +1,13 @@
-import { Paper, useMediaQuery, useTheme } from "@mui/material";
+/** Libraries */
 import React from "react";
 import Chart from "react-apexcharts";
+
+import { Paper, useMediaQuery, useTheme } from "@mui/material";
+
+/** Custom hooks */
 import { useOperationsStore } from "../../../../hooks";
+
+/** Utils */
 import Title from "../../../utils/Title";
 
 export const ChartGraphic = () => {

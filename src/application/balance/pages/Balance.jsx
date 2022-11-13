@@ -1,15 +1,22 @@
-import React, { useEffect } from "react";
+/** Libraries */
+import React from "react";
 import { Paper, Container } from "@mui/material";
-import { colors } from "../../../utils/colors";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
+
+/** Components */
 import Title from "../../utils/Title";
 import ButtonsContain from "../components/ButtonsContain";
 import Display from "../components/Display";
-import { useTheme } from "@mui/material/styles";
 import { ChartGraphic } from "../components/ChartGraphic";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import SkeletonBalance from "../components/SkeletonBalance";
-import { useState } from "react";
+
+/** Custom hooks */
 import { useOperationsStore } from "../../../hooks";
+
+/** Utils */
+import { colors } from "../../../utils/colors";
+
 const Balance = () => {
 
   const { balance } = useOperationsStore();

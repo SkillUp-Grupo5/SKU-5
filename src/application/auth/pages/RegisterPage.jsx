@@ -1,11 +1,17 @@
+/** Libraries */
 import { Link as LinkRouter } from 'react-router-dom'
 
 import { useFormik } from 'formik'
 import { Box, Button, Grid, Link, TextField } from '@mui/material'
 
+/** Components */
 import Title from '../../utils/Title'
-import { YupRegisterValidations } from '../../../helpers'
+
+/** Custom hooks */
 import { useAuthStore } from '../../../hooks'
+
+/** Helpers */
+import { YupRegisterValidations } from '../../../helpers'
 
 export const RegisterPage = () => {
 	const { StartRegister } = useAuthStore();

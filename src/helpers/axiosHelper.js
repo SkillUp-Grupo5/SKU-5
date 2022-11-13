@@ -14,7 +14,6 @@ export const axiosClient = axios.create({
 //Response
 axiosClient.interceptors.response.use(
 	(response) => {
-		console.log(response)
 		response.data.accessToken && localStorage.setItem('token', response.data.accessToken)
 		return response
 	},
@@ -26,7 +25,6 @@ axiosClient.interceptors.response.use(
 
 axiosClientToken.interceptors.response.use(
 	(response) => {
-		console.log(response)
 		return response
 	},
 	(error) => {

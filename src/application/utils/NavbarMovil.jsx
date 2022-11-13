@@ -1,4 +1,7 @@
+/** Libraries */
 import * as React from "react";
+import { Link } from "react-router-dom";
+
 import Box from "@mui/material/Box";
 import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
@@ -8,7 +11,8 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import GroupIcon from "@mui/icons-material/Group";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link } from "react-router-dom";
+
+/** Custom hooks */
 import { useAuthStore } from "../../hooks";
 
 export const NavbarMovil = () => {

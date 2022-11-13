@@ -1,15 +1,46 @@
-# Aplicacion AlkyBank
+<h1 align='center'> AlkyBank </h1>
 
-## Pasos para intalacion:
+![portada_readme_AlkyBank](https://user-images.githubusercontent.com/93409437/201484565-a50c1e1d-a871-4abe-897d-2c89a21bcc4c.png)
+### _Un banco que busca innovar y mejorar la experiencia del usuario._
 
-### 1) `git clone https://github.com/cortiz2894/alkemy-alkybank.git`
+### Equipo **R-5**
 
-Clonar el repositorio en su local.
+#### Integrates 
+------
+| Desarrolladores | Roles| Github  | LinkedIn |
+| ------------- |:-------------:| -----|------- |
+| Lucas Ojeda| Front-end   |[link](https://github.com/lucasgojeda)|[link](https://www.linkedin.com/in/lucas-ojeda-a03372225/) |
+| Valentín Ruggieri |Front-end    | [link](https://github.com/valen-ruggieri) |[link](https://www.linkedin.com/in/valentinruggieri/)|
+| Jefferson Brioso| Front-end |  [link](https://github.com/Jabbcode)  | [link](https://www.linkedin.com/in/jeffersonbrioso/) |
+| Santiago Pacini | Front-end     |  [link](https://github.com/Santipac) | [link](https://www.linkedin.com/in/santiagopacinidev/)|
+------
 
-### 2) `npm i`
+## Tecnologias y dependencias
+- React js
+- Redux Toolkit
+- Axios
+- Material UI
+- React Router
+- Yup
+- Formik
+- Chart js
+- Sweet Alert
 
-Una vez con el repositorio clonado ingresar a la carpeta 'alkemy-alkybank' y utilizar el comando para instalar las dependencias.
+## Instalación
 
-### 3) `npm start`
 
-Al finalizar la instalacion de dependencias lanzar el comando 'npm start' para correr la aplicacion en un servidor local.
+
+Primero instalamos las dependencias y luego iniciamos el servidor local.
+
+```sh
+$ cd alkybank
+```
+
+```sh
+$ npm i
+```
+
+```sh
+$ npm start
+```
+
